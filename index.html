@@ -1,0 +1,416 @@
+<!doctype html><html lang="de"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><title>Geographie LK Modellatlas</title></head><body>
+<link rel="stylesheet" href="schriften.css">
+<style>
+/* Layout: Startseite im Stil der Modellseiten. Kopf mit Suche, Leiste der sechs Themenfelder, darunter der Lernpfad des aktiven Feldes als Modellkarten mit Schemaskizze, am Ende das Begriffsregister. */
+:root{
+  --bg:#f2f5f4; --surface:#ffffff; --surface2:#e8eeec; --ink:#16242a; --ink2:#46565c; --ink3:#6b7a80; --line:#cbd5d2;
+  --oben:#2563a8; --unten:#2a7d45; --herd:#d9573f; --teal:#008f7a; --sand:#c99a2e; --violet:#7a52b3;
+  --hilfe:#a8630f; --ez:#0d6c74; --pol:#4f5596;
+  --mark:#fff1c2; --focus:#2563a8;
+  --f-display:"Archivo","Arial Narrow",system-ui,sans-serif;
+  --f-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f171a; --surface:#162126; --surface2:#1d2a2f; --ink:#e3ebed; --ink2:#a9b8bc; --ink3:#86979c; --line:#2d3d43;
+    --oben:#6ea8ea; --unten:#6fcf8d; --herd:#ef7a5f; --teal:#2fa39c; --sand:#e0b050; --violet:#9a7ad6;
+    --hilfe:#e3a452; --ez:#5cbcc3; --pol:#a3a8ea;
+    --mark:#4a3d12; --focus:#6ea8ea; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f171a; --surface:#162126; --surface2:#1d2a2f; --ink:#e3ebed; --ink2:#a9b8bc; --ink3:#86979c; --line:#2d3d43;
+  --oben:#6ea8ea; --unten:#6fcf8d; --herd:#ef7a5f; --teal:#2fa39c; --sand:#e0b050; --violet:#9a7ad6;
+  --hilfe:#e3a452; --ez:#5cbcc3; --pol:#a3a8ea;
+  --mark:#4a3d12; --focus:#6ea8ea; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:flex;flex-direction:column;gap:34px}
+h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance}
+h1{font-stretch:72%;font-weight:800;font-size:clamp(2.2rem,5.6vw,3.7rem);line-height:1;letter-spacing:-.01em}
+h2{font-stretch:80%;font-weight:700;font-size:1.65rem;line-height:1.1}
+h3{font-stretch:85%;font-weight:700;font-size:1.3rem;line-height:1.15}
+p{margin:0}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:6px}
+a{color:inherit}
+.eyebrow{font-family:var(--f-display);font-stretch:90%;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3)}
+.lede{max-width:62ch;color:var(--ink2);font-size:1.06rem}
+
+/* Kopf */
+header{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,340px);gap:20px 40px;align-items:end}
+header .intro{display:flex;flex-direction:column;gap:10px;min-width:0}
+.search{display:flex;flex-direction:column;gap:6px}
+.search label{font-family:var(--f-display);font-stretch:90%;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3)}
+.field{position:relative}
+.field svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:18px;height:18px;fill:none;stroke:var(--ink3);stroke-width:2}
+#q{width:100%;padding:11px 40px 11px 40px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);font-size:1rem}
+#q:focus{border-color:var(--focus);outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--focus) 25%,transparent)}
+#q::-webkit-search-cancel-button{-webkit-appearance:none;display:none}
+#qClear{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:none;cursor:pointer;color:var(--ink3);font-size:1.3rem;line-height:1;padding:4px 8px}
+#qInfo{font-size:.88rem;color:var(--ink3);min-height:1.3em}
+@media (max-width:760px){ header{grid-template-columns:minmax(0,1fr)} }
+
+/* Themenfelder */
+.fields{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+@media (max-width:980px){ .fields{grid-template-columns:repeat(3,minmax(0,1fr))} }
+@media (max-width:520px){ .fields{grid-template-columns:repeat(2,minmax(0,1fr))} }
+.fld{appearance:none;text-align:left;border:1.5px solid var(--line);background:var(--surface);border-radius:12px;padding:12px 14px 14px;display:flex;flex-direction:column;gap:8px;min-width:0;cursor:pointer}
+.fld .no{font-family:var(--f-display);font-stretch:75%;font-weight:800;font-size:1.9rem;line-height:1;color:var(--ink3);font-variant-numeric:tabular-nums}
+.fld .nm{hyphens:manual;overflow-wrap:anywhere;font-family:var(--f-display);font-stretch:88%;font-weight:700;font-size:1.02rem;line-height:1.2;text-wrap:balance}
+.fld .ct{font-size:.84rem;color:var(--ink3);margin-top:auto}
+.fld:hover{border-color:var(--ink3)}
+.fld[aria-current="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.fld[aria-current="true"] .no{color:var(--oben)}
+.fld.empty{background:transparent;border-style:dashed}
+.fld.empty .nm{color:var(--ink2)}
+
+/* Bereich */
+.area{display:flex;flex-direction:column;gap:18px}
+.area-head{display:flex;flex-direction:column;gap:6px}
+.path{display:grid;grid-template-columns:minmax(0,1fr);gap:0;counter-reset:step}
+.step{display:grid;grid-template-columns:44px minmax(0,1fr);gap:0 16px}
+.rail{display:flex;flex-direction:column;align-items:center}
+.rail .dot{width:36px;height:36px;border-radius:50%;background:var(--ink);color:var(--surface);display:grid;place-items:center;font-family:var(--f-display);font-weight:800;font-stretch:80%;font-size:1.1rem;flex:none}
+.rail .ln{flex:1;width:2px;background:var(--line);margin-block:6px}
+.step:last-child .rail .ln{display:none}
+.step .body{padding-bottom:22px;min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;display:grid;grid-template-columns:240px minmax(0,1fr);overflow:hidden}
+@media (max-width:720px){ .card{grid-template-columns:minmax(0,1fr)} .step{grid-template-columns:36px minmax(0,1fr);gap:0 10px} .rail .dot{width:30px;height:30px;font-size:.95rem} }
+.thumb{background:var(--surface2);display:grid;place-items:center;padding:16px;border-right:1px solid var(--line)}
+@media (max-width:720px){ .thumb{border-right:0;border-bottom:1px solid var(--line)} }
+.thumb svg{width:100%;max-width:240px;height:auto;display:block}
+.cbody{padding:18px 20px 20px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.ctop{display:flex;flex-direction:column;gap:4px}
+.lq{font-style:italic;color:var(--ink2)}
+.meta{font-size:.88rem;color:var(--ink3)}
+.lbl{font-family:var(--f-display);font-stretch:90%;font-weight:600;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3)}
+.row{display:flex;flex-direction:column;gap:6px}
+.links{display:flex;flex-wrap:wrap;gap:8px}
+.go{display:inline-flex;align-items:center;gap:8px;text-decoration:none;padding:7px 14px;border-radius:999px;border:1.5px solid var(--line);font-family:var(--f-display);font-stretch:88%;font-weight:600;font-size:.98rem;background:var(--surface)}
+.go:hover{border-color:var(--ink)}
+.go.main{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.go.main:hover{opacity:.9}
+.go .ar{font-size:.85em}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{appearance:none;border:1px solid var(--line);background:var(--surface2);border-radius:999px;padding:3px 11px;cursor:pointer;font-size:.86rem}
+.chip:hover{border-color:var(--ink)}
+.chip.hit{background:var(--mark);border-color:var(--sand)}
+.bridge{font-size:.92rem;color:var(--ink2);padding:2px 0 0}
+.none{padding:22px;border:1.5px dashed var(--line);border-radius:14px;color:var(--ink2);display:flex;flex-direction:column;gap:6px}
+
+/* Register */
+.reg{display:flex;flex-direction:column;gap:16px}
+.reg-head{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:end;justify-content:space-between}
+.filters{display:flex;flex-wrap:wrap;gap:6px}
+.flt{appearance:none;border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;cursor:pointer;font-size:.88rem;display:inline-flex;align-items:center;gap:7px}
+.flt i{width:10px;height:10px;border-radius:50%;background:var(--c,var(--ink3));display:inline-block}
+.flt[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.terms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:8px 22px}
+@media (max-width:760px){ .terms{grid-template-columns:minmax(0,1fr);padding:6px 16px} }
+.letter{grid-column:1/-1;font-family:var(--f-display);font-stretch:75%;font-weight:800;font-size:1.3rem;color:var(--ink3);padding:14px 0 2px;border-bottom:1px solid var(--line)}
+.term{padding:12px 0;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:4px;min-width:0;scroll-margin-top:20px;border-radius:4px;transition:background .4s}
+.term .th{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.term b{font-family:var(--f-display);font-stretch:88%;font-weight:700;font-size:1.06rem}
+.term .al{font-size:.84rem;color:var(--ink3)}
+.term p{font-size:.95rem;color:var(--ink2)}
+.term .src{font-size:.84rem;display:flex;align-items:center;gap:6px;color:var(--ink3)}
+.term .src i{width:8px;height:8px;border-radius:50%;background:var(--c);flex:none}
+.term .src a{color:var(--ink2);text-underline-offset:2px}
+.term.flash{background:var(--mark)}
+mark{background:var(--mark);color:inherit;border-radius:2px;padding:0 1px}
+.noterm{padding:18px 0;color:var(--ink2)}
+footer{font-size:.85rem;color:var(--ink3);max-width:80ch}
+@media (prefers-reduced-motion: reduce){ *{transition:none!important;scroll-behavior:auto!important} }
+</style>
+
+<div class="wrap" lang="de">
+  <header>
+    <div class="intro">
+      <span class="eyebrow">Geographie · Leistungskurs · Qualifikationsphase</span>
+      <h1>Modelle &amp; Begriffe</h1>
+      <p class="lede">Hier startest du zu allen interaktiven Modellseiten des Kurses. Wähle ein Themenfeld, folge dem Lernpfad oder schlage einen Fachbegriff im Register nach.</p>
+    </div>
+    <div class="search">
+      <label for="q">Modell oder Begriff suchen</label>
+      <div class="field">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>
+        <input id="q" type="search" placeholder="z. B. Entzugseffekte, Scholz" autocomplete="off">
+        <button id="qClear" type="button" aria-label="Suche leeren" hidden>×</button>
+      </div>
+      <span id="qInfo" aria-live="polite"></span>
+    </div>
+  </header>
+
+  <nav aria-label="Themenfelder">
+    <div class="fields" id="fields"></div>
+  </nav>
+
+  <section class="area" id="area" aria-live="polite"></section>
+
+  <section class="reg" id="register" aria-labelledby="regTitle">
+    <div class="reg-head">
+      <div class="area-head">
+        <span class="eyebrow">Register</span>
+        <h2 id="regTitle">Fachbegriffe von A bis Z</h2>
+      </div>
+      <div class="filters" id="filters" role="group" aria-label="Begriffe nach Modellseite filtern"></div>
+    </div>
+    <div class="terms" id="terms"></div>
+  </section>
+
+  <footer>Über die Bereichs-Links springst du direkt zu einem Teil einer Modellseite, z. B. zur Simulation oder zu den Übungen. Von jeder Modellseite führt die Leiste oben zurück zu dieser Übersicht.</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]));
+const norm=s=>String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/ß/g,'ss');
+
+/* Themenfelder in der Reihenfolge des Kurses */
+const FIELDS=[
+  {id:'disparitaeten',name:'Globale Disparitäten und Lösungs\u00adansätze'},
+  {id:'tourismus',name:'Tourismus'},
+  {id:'bevoelkerung',name:'Bevölkerungs\u00adentwicklung und Migration'},
+  {id:'stadt',name:'Stadt\u00adgeographie'},
+  {id:'wirtschaft',name:'Wirtschafts\u00adgeographie'},
+  {id:'landwirtschaft',name:'Land\u00adwirtschaft'}
+];
+
+/* Bereits erstellte Modellseiten */
+const MODELS={
+  wandel:{field:'disparitaeten',color:'var(--ez)',
+    title:'Entwicklungsstrategien im Wandel',
+    url:'strategien.html',
+    q:'Wie haben sich die Vorstellungen davon, wie Entwicklung gelingt, seit 1950 verändert?',
+    text:'Interaktive Zeitleiste von 1950 bis heute: Strategien wie Wachstumspolitik, Grundbedürfnisorientierung, Strukturanpassung oder die SDGs, dazu der Wandel der Leitbegriffe von der Entwicklungshilfe zur Entwicklungspolitik.',
+    by:'Phasenmodell nach Theo Rauch, ergänzt um die Zeit seit 2020',
+    parts:[['Zeitleiste öffnen','']],
+    extra:'Auf der Seite: Zeitregler, Übungsmodus und Aufgaben.',
+    terms:['entwicklungshilfe','ez','entwicklungspolitik','trickle','strukturanpassung','basispartizipation','governance','nachhaltigkeit','mdg','sdg']},
+  obun:{field:'disparitaeten',color:'var(--oben)',
+    title:'Entwicklung von oben und unten',
+    url:'oben-unten.html',
+    q:'Soll Entwicklung in einem Zentrum beginnen und ausstrahlen oder aus den Gemeinden wachsen?',
+    text:'Beide Modelle bauen sich Schritt für Schritt auf. Eine Simulation zeigt über 30 Jahre, wie sich Wirtschaftsleistung und räumliche Disparitäten in einem Modellland entwickeln.',
+    by:'Modellidee nach Stöhr & Taylor (1981)',
+    parts:[['Modelle erkunden','modelle'],['Simulation','simulation'],['Vergleichen','vergleich'],['Üben','ueben']],
+    terms:['oben','unten','ebenen','wachstumspol','entscheidungsweg','ausbreitung','entzug','peripherie','kreislauf','landesdurchdringend','selektiv','selbsthilfe']},
+  frag:{field:'disparitaeten',color:'var(--herd)',
+    title:'Fragmentierende Entwicklung',
+    url:'fragmentierung.html',
+    q:'Wer gewinnt durch die Globalisierung, wer verliert, und warum liegen beide oft direkt nebeneinander?',
+    text:'Die Welt in Fragmenten: neun Ortstypen von Gewinnern, Scheingewinnern und Verlierern, eine Stadtskizze zur lokalen Fragmentierung und Szenarien, in denen Orte auf- oder absteigen.',
+    by:'Modell nach Fred Scholz',
+    parts:[['Globale Fragmentierung','global'],['Lokale Fragmentierung','lokal'],['Gewinner auf Zeit?','dynamik'],['Üben','ueben']],
+    terms:['fragmentierung','globaleorte','globalisierteorte','neueperipherie','kommando','fordistisch','auslagerung','epz','gated','enklave','informell','lokalefrag']}
+};
+const PATH={disparitaeten:{order:['wandel','obun','frag'],
+  bridges:['Danach im Detail: zwei räumliche Strategien, die in diesen Phasen eine Rolle spielen.','Danach: Was die Globalisierung mit Räumen macht, quer zu allen Strategien.']}};
+
+/* Begriffe, wie sie auf den Modellseiten erklärt werden */
+const TERMS={
+  entwicklungshilfe:['wandel','','Entwicklungshilfe','','Einseitige Unterstützung: Ein wohlhabenderes Land gibt Geld, Güter oder Fachleute an ein ärmeres Land. Leitbegriff bis etwa 1990, heute als Begriff für Entwicklung veraltet.'],
+  ez:['wandel','','Entwicklungszusammenarbeit','EZ','Maßnahmen, die Wachstum und soziale Entwicklung gemeinsam mit Partnerländern fördern, bilateral oder multilateral. Ziel ist Hilfe zur Selbsthilfe.'],
+  entwicklungspolitik:['wandel','','Entwicklungspolitik','Global Governance','Gestaltung globaler Rahmenbedingungen für Entwicklung, z. B. durch Handels- oder Klimaabkommen. Entwicklung gilt als Aufgabe aller Staaten, auch des Nordens.'],
+  trickle:['wandel','','Trickle-down','Durchsickern','Annahme der wachstumspolitischen Phase: Wirtschaftswachstum sickert von selbst zu den Armen durch.'],
+  strukturanpassung:['wandel','','Strukturanpassung','neoliberale Phase','Entschuldung durch Weltbank und IWF gegen Auflagen wie Privatisierung, Marktöffnung und Abbau der Staatsausgaben (ab 1980).'],
+  basispartizipation:['wandel','','Basispartizipation','','Lokale Gemeinschaften erkennen ihre Potenziale und ergreifen selbst Initiativen. NGOs werden wichtige Akteure.'],
+  governance:['wandel','','Good Governance','institutionalistische Phase','Stärkung staatlicher Institutionen wie Verwaltung, Justiz und Steuerbehörden. Programme werden oft an demokratische Strukturen gekoppelt.'],
+  nachhaltigkeit:['wandel','','Nachhaltige Entwicklung','Brundtland-Bericht','Heute gut leben, ohne die Zukunft zu verbauen. Seit dem Brundtland-Bericht 1987 Leitbild der Zusammenarbeit.'],
+  mdg:['wandel','','Millenniumsentwicklungsziele','MDGs','Acht Ziele der Vereinten Nationen für 2000 bis 2015, z. B. den Anteil extrem armer Menschen zu halbieren.'],
+  sdg:['wandel','','Ziele für nachhaltige Entwicklung','SDGs, Agenda 2030','17 Ziele der Vereinten Nationen seit 2016. Sie gelten für alle Staaten, auch für Deutschland.'],
+  oben:['obun','modelle','Entwicklung von oben','','Entwicklung beginnt in einem Zentrum, meist der Hauptstadt, angestoßen durch Staat und externe Vorgaben. Von dort soll sie ins Land ausstrahlen.'],
+  unten:['obun','modelle','Entwicklung von unten','','Entwicklung beginnt in den Gemeinden. Lokale Kreisläufe verbinden sich zu regionalen und schließlich landesweiten Strukturen.'],
+  ebenen:['obun','modelle','Maßstabsebenen','national, regional, lokal','Der ganze Staat, Landesteile und Provinzen, Gemeinden und Dörfer. Das Modell zeigt, wo Entwicklung beginnt und wohin sie sich ausbreitet.'],
+  wachstumspol:['obun','modelle','Wachstumspol','Entwicklungsherd','Standort, an dem Entwicklung konzentriert beginnt und von dem Wachstum ins Land ausstrahlen soll (Wachstumspoltheorie nach F. Perroux).'],
+  entscheidungsweg:['obun','modelle','Entscheidungsweg','','Zeigt, auf welcher Ebene über Entwicklung entschieden wird: bei der Regierung (von oben) oder bei den Gemeinden (von unten).'],
+  ausbreitung:['obun','simulation','Ausbreitungseffekte','spread effects, Sickereffekte','Positive Wirkungen, die vom Zentrum ins Umland übergreifen sollen: Aufträge für Zulieferer, Arbeitsplätze, Einkommen, Infrastruktur.'],
+  entzug:['obun','simulation','Entzugseffekte','backwash effects','Das Zentrum zieht Arbeitskräfte, Kapital und Rohstoffe aus der Peripherie ab (nach G. Myrdal). Die räumlichen Disparitäten wachsen.'],
+  peripherie:['obun','modelle','Peripherie','','Randräume abseits der Zentren. Hier kommen die erhofften Ausbreitungseffekte oft nur schwach oder gar nicht an.'],
+  kreislauf:['obun','modelle','Entwicklungskreislauf','','Einnahmen und Wissen bleiben vor Ort und werden dort wieder eingesetzt. Der Kreislauf verstärkt sich selbst.'],
+  landesdurchdringend:['obun','modelle','Landesdurchdringende Entwicklung','','Entwicklung, die das ganze Land in der Fläche erfasst. Es entsteht ein stabiler Binnenmarkt.'],
+  selektiv:['obun','modelle','Selektive Öffnung','externe Teilnahme','Das Land beteiligt sich erst am Welthandel, wenn es aus eigener Kraft stabil genug ist.'],
+  selbsthilfe:['obun','modelle','Hilfe zur Selbsthilfe','','Unterstützung von außen, die direkt bei den Menschen ankommt und ihnen hilft, sich künftig selbst zu helfen, etwa durch Ausbildung oder Kleinkredite.'],
+  fragmentierung:['frag','global','Fragmentierende Entwicklung','Theorie nach F. Scholz','Die Globalisierung erfasst nur ausgewählte Orte. Gewinner und Verlierer liegen innerhalb derselben Staaten und Städte nebeneinander.'],
+  globaleorte:['frag','global','Globale Orte','Gewinner, acting global cities','Kommandozentren, Hightech- und Forschungszentren sowie fordistische Industriezonen. Von hier aus wird die Weltwirtschaft gesteuert.'],
+  globalisierteorte:['frag','global','Globalisierte Orte','Scheingewinner, affected global cities','Orte, die für die globalen Orte arbeiten, etwa in Auslagerungsindustrie, Billiglohnproduktion oder Rohstoffförderung. Sie bleiben abhängig.'],
+  neueperipherie:['frag','global','Neue Peripherie','Verlierer, „Neuer Süden“','Räume, deren Menschen als Arbeitskräfte, Kunden und Produzenten „überflüssig“ sind. Sie liegt nicht nur im Globalen Süden.'],
+  kommando:['frag','global','Kommandozentren der Wirtschaft','Typ 1','Sitz von Konzernzentralen, Banken und Börsen, z. B. New York, London, Frankfurt am Main.'],
+  fordistisch:['frag','global','Fordistische Industriezone','Typ 3','Massenproduktion mit hoher Fertigungstiefe, etwa in der Autoindustrie. Sie kann absteigen, wenn die Produktion abwandert.'],
+  auslagerung:['frag','global','Auslagerungsindustrie','Typ 5','Zweigwerke montieren Vorprodukte für Konzerne aus den globalen Orten, oft in Sonderwirtschaftszonen, z. B. Maquiladoras in Nordmexiko.'],
+  epz:['frag','lokal','Exportproduktionszone','','Abgegrenztes Gelände mit Steuervorteilen und Zollfreiheit, in dem für den Weltmarkt montiert wird. Einheimische Betriebe bekommen kaum Aufträge.'],
+  gated:['frag','lokal','Gated Community','„Paradies“, „Zitadelle“','Bewachte, abgeschottete Wohnanlage der Oberschicht, oft direkt neben Slumvierteln.'],
+  enklave:['frag','global','Tourismusenklave','Typ 9','Abgeschlossene Ferienanlage, vom Umland getrennt. Ein großer Teil der Einnahmen fließt an ausländische Veranstalter und Hotelketten.'],
+  informell:['frag','lokal','Informeller Sektor','','Arbeit ohne Vertrag, Steuern und soziale Absicherung, etwa als Tagelöhner oder Straßenhändler. Prägt die neue Peripherie.'],
+  lokalefrag:['frag','lokal','Lokale Fragmentierung','Wirtschaftsfragment','Innerhalb einer Stadt sind nur einzelne Viertel an die Weltwirtschaft angeschlossen, andere haben kaum etwas davon.']
+};
+const SRC={wandel:'Strategien im Wandel',obun:'Oben und unten',frag:'Fragmentierung'};
+
+/* Schemaskizzen */
+const THUMB={
+  wandel:`<svg viewBox="0 0 240 150" role="img" aria-label="Skizze: Zeitleiste mit sich überlappenden Strategiephasen">
+    <rect x="12" y="18" width="98" height="16" rx="3" fill="var(--hilfe)" opacity=".85"/>
+    <rect x="112" y="18" width="64" height="16" rx="3" fill="var(--ez)" opacity=".85"/>
+    <rect x="178" y="18" width="20" height="16" rx="3" fill="var(--pol)" opacity=".85"/>
+    <rect x="200" y="18" width="28" height="16" rx="3" fill="var(--ink3)" opacity=".5"/>
+    <g fill="var(--surface)" stroke="var(--ink3)" stroke-width="1">
+      <rect x="12" y="46" width="60" height="12" rx="3"/><rect x="88" y="46" width="40" height="12" rx="3"/><rect x="150" y="46" width="78" height="12" rx="3"/>
+      <rect x="54" y="64" width="34" height="12" rx="3"/><rect x="100" y="64" width="54" height="12" rx="3"/><rect x="198" y="64" width="30" height="12" rx="3"/>
+      <rect x="110" y="82" width="62" height="12" rx="3"/><rect x="108" y="100" width="76" height="12" rx="3"/>
+    </g>
+    <line x1="12" y1="124" x2="228" y2="124" stroke="var(--ink3)" stroke-width="1.5"/>
+    <g font-family="Atkinson Hyperlegible, sans-serif" font-size="9" fill="var(--ink3)" text-anchor="middle"><text x="12" y="138">1950</text><text x="120" y="138">1990</text><text x="228" y="138">heute</text></g>
+    <line x1="140" y1="10" x2="140" y2="124" stroke="var(--herd)" stroke-width="2"/><circle cx="140" cy="124" r="5" fill="var(--herd)"/>
+  </svg>`,
+  obun:`<svg viewBox="0 0 240 150" role="img" aria-label="Skizze: links Entwicklung von oben mit Pfeilen von einem Zentrum nach unten, rechts Entwicklung von unten mit Kreisläufen">
+    <defs><marker id="ma" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 10 5 0 10z" fill="var(--oben)"/></marker>
+    <marker id="mb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 10 5 0 10z" fill="var(--unten)"/></marker></defs>
+    <g stroke="var(--line)" stroke-dasharray="3 3"><line x1="6" y1="56" x2="234" y2="56"/><line x1="6" y1="100" x2="234" y2="100"/></g>
+    <line x1="120" y1="8" x2="120" y2="142" stroke="var(--ink3)" stroke-width="1"/>
+    <circle cx="60" cy="28" r="10" fill="var(--herd)"/>
+    <g stroke="var(--oben)" stroke-width="2" fill="none" marker-end="url(#ma)"><path d="M54 38 28 74"/><path d="M60 40 60 76"/><path d="M66 38 92 74"/><path d="M60 86 60 116"/></g>
+    <g fill="var(--surface)" stroke="var(--herd)" stroke-width="1.5"><circle cx="26" cy="82" r="4"/><circle cx="94" cy="82" r="4"/><circle cx="36" cy="128" r="4"/><circle cx="84" cy="128" r="4"/></g>
+    <g fill="var(--herd)"><circle cx="146" cy="124" r="6"/><circle cx="176" cy="124" r="6"/><circle cx="206" cy="124" r="6"/></g>
+    <g stroke="var(--unten)" stroke-width="2" fill="none" marker-end="url(#mb)"><path d="M136 132a12 12 0 1 1 18 -14"/><path d="M166 132a12 12 0 1 1 18 -14"/><path d="M196 132a12 12 0 1 1 18 -14"/>
+    <path d="M160 106 C150 84 170 70 176 62"/><path d="M196 104 C206 80 190 50 176 34"/></g>
+  </svg>`,
+  frag:`<svg viewBox="0 0 240 150" role="img" aria-label="Skizze: Weltellipse mit Gewinnern, Scheingewinnern und Verlierern, vergrößerter Ausschnitt einer Stadt">
+    <ellipse cx="88" cy="84" rx="78" ry="50" fill="color-mix(in srgb,var(--sand) 28%,var(--surface))" stroke="var(--ink3)" stroke-width="1.2"/>
+    <g stroke="var(--surface)" stroke-width="2" fill="none"><path d="M30 70 70 82 96 64"/><path d="M70 82 64 124"/><path d="M96 64 140 92"/></g>
+    <g fill="var(--herd)"><circle cx="50" cy="60" r="6"/><circle cx="110" cy="52" r="6"/><circle cx="128" cy="108" r="6"/></g>
+    <g fill="var(--teal)"><circle cx="40" cy="96" r="5"/><circle cx="84" cy="100" r="5"/><circle cx="100" cy="82" r="5"/><circle cx="146" cy="74" r="5"/><circle cx="62" cy="110" r="5"/><circle cx="114" cy="120" r="5"/></g>
+    <line x1="146" y1="74" x2="196" y2="46" stroke="var(--ink3)" stroke-width="1"/><line x1="146" y1="74" x2="200" y2="98" stroke="var(--ink3)" stroke-width="1"/>
+    <ellipse cx="204" cy="72" rx="30" ry="26" fill="color-mix(in srgb,var(--teal) 25%,var(--surface))" stroke="var(--ink3)" stroke-width="1"/>
+    <ellipse cx="204" cy="62" rx="11" ry="5" fill="var(--herd)"/><ellipse cx="190" cy="80" rx="8" ry="4" fill="var(--violet)"/><ellipse cx="218" cy="84" rx="8" ry="4" fill="var(--unten)"/>
+  </svg>`
+};
+
+let field='disparitaeten', q='', srcFilter='';
+
+function countIn(f){ return Object.values(MODELS).filter(m=>m.field===f).length; }
+function renderFields(){
+  $('#fields').innerHTML=FIELDS.map((f,i)=>{
+    const n=countIn(f.id);
+    return `<button type="button" class="fld${n?'':' empty'}" data-f="${f.id}" aria-current="${f.id===field}">
+      <span class="no">${i+1}</span><span class="nm">${esc(f.name)}</span>
+      <span class="ct">${n?n+(n===1?' Modellseite':' Modellseiten'):'noch keine Modellseite'}</span></button>`;
+  }).join('');
+  $('#fields').querySelectorAll('.fld').forEach(b=>b.onclick=()=>{ field=b.dataset.f; renderFields(); renderArea(); });
+}
+
+function modelMatches(key){
+  if(!q) return true;
+  const m=MODELS[key];
+  const hay=norm([m.title,m.q,m.text,m.by,...m.terms.map(t=>TERMS[t][2]+' '+TERMS[t][3])].join(' '));
+  return q.split(/\s+/).every(w=>hay.includes(w));
+}
+function termMatches(key){
+  if(!q) return true;
+  const t=TERMS[key]; const hay=norm(t[2]+' '+t[3]+' '+t[4]+' '+SRC[t[0]]);
+  return q.split(/\s+/).every(w=>hay.includes(w));
+}
+function termNameHit(key){ if(!q) return false; const t=TERMS[key]; const h=norm(t[2]+' '+t[3]); return q.split(/\s+/).every(w=>h.includes(w)); }
+
+function card(key,i,plain){
+  const m=MODELS[key];
+  const links=m.parts.map(([lab,hash],j)=>`<a class="go${j===0?' main':''}" href="${m.url}${hash?'#'+hash:''}">${esc(lab)} <span class="ar" aria-hidden="true">→</span></a>`).join('');
+  const chips=m.terms.map(t=>`<button type="button" class="chip${termNameHit(t)?' hit':''}" data-t="${t}">${esc(TERMS[t][2])}</button>`).join('');
+  return `<div class="step"><div class="rail"><span class="dot">${plain?'•':i+1}</span><span class="ln"></span></div>
+   <div class="body"><article class="card">
+    <div class="thumb">${THUMB[key]}</div>
+    <div class="cbody">
+      <div class="ctop"><h3>${esc(m.title)}</h3><span class="meta">${esc(m.by)}</span></div>
+      <p class="lq">${esc(m.q)}</p>
+      <p>${esc(m.text)}</p>
+      <div class="row"><span class="lbl">${m.parts.length>1?'Direkt zum Bereich':'Öffnen'}</span><div class="links">${links}</div>${m.extra?`<span class="meta">${esc(m.extra)}</span>`:''}</div>
+      <div class="row"><span class="lbl">Fachbegriffe</span><div class="chips">${chips}</div></div>
+    </div></article>
+    ${PATH[m.field]&&PATH[m.field].bridges[i]&&!q?`<p class="bridge">${esc(PATH[m.field].bridges[i])}</p>`:''}
+   </div></div>`;
+}
+
+function renderArea(){
+  const area=$('#area');
+  if(q){
+    const hits=Object.keys(MODELS).filter(modelMatches);
+    area.innerHTML=`<div class="area-head"><span class="eyebrow">Suche</span><h2>${hits.length?hits.length+(hits.length===1?' Modellseite':' Modellseiten'):'Keine Modellseite'} zu „${esc($('#q').value.trim())}“</h2></div>`+
+      (hits.length?`<div class="path">${hits.map((k,i)=>card(k,i,true)).join('')}</div>`:'');
+  } else {
+    const f=FIELDS.find(x=>x.id===field), idx=FIELDS.indexOf(f)+1;
+    const order=(PATH[field]&&PATH[field].order)||Object.keys(MODELS).filter(k=>MODELS[k].field===field);
+    area.innerHTML=`<div class="area-head"><span class="eyebrow">Themenfeld ${idx}</span><h2>${esc(f.name)}</h2>
+      ${order.length?'<p class="lede">Lernpfad: Die Modellseiten bauen aufeinander auf. Beginne oben.</p>':''}</div>`+
+      (order.length?`<div class="path">${order.map((k,i)=>card(k,i)).join('')}</div>`:
+      `<div class="none"><strong>Für dieses Themenfeld gibt es noch keine Modellseite.</strong><span>Sobald eine interaktive Seite erstellt ist, erscheint sie hier.</span></div>`);
+  }
+  area.querySelectorAll('.chip').forEach(c=>c.onclick=()=>showTerm(c.dataset.t));
+}
+
+/* Treffer markieren, unabhängig von Groß-/Kleinschreibung und Akzenten */
+function hl(s){
+  if(!q) return esc(s);
+  const chars=[...s]; let n='', map=[];
+  chars.forEach((c,i)=>{ const nc=norm(c); for(let k=0;k<nc.length;k++){ n+=nc[k]; map.push(i); } });
+  const on=new Array(chars.length).fill(false);
+  q.split(/\s+/).filter(w=>w.length>1).forEach(w=>{
+    let p=0; while((p=n.indexOf(w,p))>-1){ for(let k=p;k<p+w.length;k++) on[map[k]]=true; p+=w.length; }
+  });
+  let out='', open=false;
+  chars.forEach((c,i)=>{ if(on[i]&&!open){out+='<mark>';open=true;} if(!on[i]&&open){out+='</mark>';open=false;} out+=esc(c); });
+  return out+(open?'</mark>':'');
+}
+
+function renderFilters(){
+  const opts=[['','Alle','var(--ink3)'],...Object.keys(MODELS).map(k=>[k,SRC[k],MODELS[k].color])];
+  $('#filters').innerHTML=opts.map(([k,l,c])=>`<button type="button" class="flt" style="--c:${c}" data-s="${k}" aria-pressed="${k===srcFilter}">${k?'<i></i>':''}${esc(l)}</button>`).join('');
+  $('#filters').querySelectorAll('.flt').forEach(b=>b.onclick=()=>{ srcFilter=b.dataset.s; renderFilters(); renderTerms(); });
+}
+function renderTerms(){
+  const keys=Object.keys(TERMS).filter(k=>(!srcFilter||TERMS[k][0]===srcFilter)&&termMatches(k))
+    .sort((a,b)=>TERMS[a][2].localeCompare(TERMS[b][2],'de'));
+  if(!keys.length){ $('#terms').innerHTML=`<p class="noterm">Kein Fachbegriff gefunden. Prüfe die Schreibweise oder setze den Filter auf „Alle“.</p>`; return; }
+  let last='', h='';
+  keys.forEach(k=>{
+    const [src,hash,name,alias,def]=TERMS[k], m=MODELS[src];
+    const L=name.normalize('NFD')[0].toUpperCase();
+    if(L!==last){ h+=`<div class="letter" aria-hidden="true">${L}</div>`; last=L; }
+    h+=`<div class="term" id="term-${k}" tabindex="-1">
+      <div class="th"><b>${hl(name)}</b>${alias?`<span class="al">${hl(alias)}</span>`:''}</div>
+      <p>${hl(def)}</p>
+      <span class="src" style="--c:${m.color}"><i></i><a href="${m.url}${hash?'#'+hash:''}">${esc(m.title)} →</a></span></div>`;
+  });
+  $('#terms').innerHTML=h;
+}
+
+function showTerm(k){
+  let el=document.getElementById('term-'+k);
+  if(!el){ srcFilter=''; renderFilters(); q=''; $('#q').value=''; $('#qClear').hidden=true; update(); el=document.getElementById('term-'+k); }
+  if(!el) return;
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  el.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'});
+  el.classList.add('flash'); el.focus({preventScroll:true});
+  setTimeout(()=>el.classList.remove('flash'),1600);
+}
+
+function update(){
+  renderArea(); renderTerms();
+  if(q){
+    const m=Object.keys(MODELS).filter(modelMatches).length, t=Object.keys(TERMS).filter(termMatches).length;
+    $('#qInfo').textContent=`${m} ${m===1?'Modellseite':'Modellseiten'}, ${t} ${t===1?'Fachbegriff':'Fachbegriffe'}`;
+  } else $('#qInfo').textContent='';
+}
+$('#q').addEventListener('input',e=>{ q=norm(e.target.value.trim()); $('#qClear').hidden=!e.target.value; update(); });
+$('#qClear').onclick=()=>{ $('#q').value=''; q=''; $('#qClear').hidden=true; update(); $('#q').focus(); };
+
+const h=(location.hash||'').slice(1);
+if(FIELDS.some(f=>f.id===h)) field=h;
+renderFields(); renderFilters(); update();
+if(h==='register') setTimeout(()=>$('#register').scrollIntoView(),50);
+})();
+</script>
+
+</body></html>

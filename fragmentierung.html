@@ -1,0 +1,801 @@
+<!doctype html><html lang="de"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<style>
+.lkbar{--lkb-bg:#16242a;--lkb-fg:#ffffff;--lkb-mu:#b9c6ca;display:flex;flex-wrap:wrap;gap:4px 16px;align-items:center;justify-content:space-between;padding:9px 16px;background:var(--lkb-bg);color:var(--lkb-fg);font:600 15px/1.3 "Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .lkbar{--lkb-bg:#e3ebed;--lkb-fg:#16242a;--lkb-mu:#46565c}}
+:root[data-theme="dark"] .lkbar{--lkb-bg:#e3ebed;--lkb-fg:#16242a;--lkb-mu:#46565c}
+.lkbar a{color:var(--lkb-fg);text-decoration:none;display:inline-flex;gap:8px;align-items:center;padding:4px 0}
+.lkbar a:hover{text-decoration:underline;text-underline-offset:3px}
+.lkbar a:focus-visible{outline:3px solid var(--lkb-mu);outline-offset:2px;border-radius:4px}
+.lkbar span{color:var(--lkb-mu);font-weight:400;font-size:13px}
+</style>
+<nav class="lkbar" aria-label="Plattform"><a href="index.html"><span aria-hidden="true" style="color:inherit;font-size:16px">←</span> Modelle &amp; Begriffe</a><span>Themenfeld 1 · Globale Disparitäten und Lösungsansätze</span></nav>
+
+<title>Fragmentierende Entwicklung</title>
+<link rel="stylesheet" href="schriften.css">
+<style>
+/* Layout: Schwesterseite zu „Entwicklung von oben und unten“. Kopf, Tab-Leiste, je Tab große schematische Figur neben einem Lese-Panel. */
+:root{
+  --bg:#f3f4f1; --surface:#ffffff; --surface2:#eceee8; --ink:#1c2226; --ink2:#4a5359; --ink3:#6b757a; --line:#cfd4cc;
+  --gew:#c24a30; --gew-soft:#f7e2da;
+  --sch:#16808f; --sch-soft:#d8eef1;
+  --ver:#8f6000; --ver-soft:#f6ebcd; --peri:#f6e8bd; --hatch:#c9a54a; --bline:#fffaf0;
+  --on:#ffffff;
+  --land:#e9e8df; --sea:#bcd8e1;
+  --f-wi:#9c3a44; --f-wi2:#c96f77; --f-ap:#e0a9b0; --f-ar:#f3dde0;
+  --f-ex:#7a58b5; --f-ex2:#a88bd6; --f-vi:#3f9555; --f-vi2:#8fcf9e; --f-ze:#ad9888; --f-vw:#ddb060; --f-wo:#acd4de; --f-sl:#6f9ba7;
+  --good:#2a7d45; --bad:#b3261e; --focus:#2563a8;
+  --f-display:"Archivo","Arial Narrow",system-ui,sans-serif;
+  --f-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#12171a; --surface:#1a2125; --surface2:#232c31; --ink:#e4e9ea; --ink2:#aab5b9; --ink3:#89969b; --line:#323e44;
+  --gew:#ec7c60; --gew-soft:#3b231c; --sch:#52c1ce; --sch-soft:#14333a; --ver:#e2b451; --ver-soft:#352c16;
+  --peri:#2e2918; --hatch:#8a7330; --bline:#1a2125; --on:#11171a; --land:#1b2225; --sea:#1d3b46;
+  --f-wi:#d2656f; --f-wi2:#9e4a53; --f-ap:#8e5a61; --f-ar:#4a3539;
+  --f-ex:#a386db; --f-ex2:#5f4a88; --f-vi:#5fbf78; --f-vi2:#2f6b40; --f-ze:#8b7a6c; --f-vw:#c79a45; --f-wo:#2c5361; --f-sl:#4f7d8a;
+  --good:#6fcf8d; --bad:#f08b76; --focus:#6ea8ea; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#12171a; --surface:#1a2125; --surface2:#232c31; --ink:#e4e9ea; --ink2:#aab5b9; --ink3:#89969b; --line:#323e44;
+  --gew:#ec7c60; --gew-soft:#3b231c; --sch:#52c1ce; --sch-soft:#14333a; --ver:#e2b451; --ver-soft:#352c16;
+  --peri:#2e2918; --hatch:#8a7330; --bline:#1a2125; --on:#11171a; --land:#1b2225; --sea:#1d3b46;
+  --f-wi:#d2656f; --f-wi2:#9e4a53; --f-ap:#8e5a61; --f-ar:#4a3539;
+  --f-ex:#a386db; --f-ex2:#5f4a88; --f-vi:#5fbf78; --f-vi2:#2f6b40; --f-ze:#8b7a6c; --f-vw:#c79a45; --f-wo:#2c5361; --f-sl:#4f7d8a;
+  --good:#6fcf8d; --bad:#f08b76; --focus:#6ea8ea; color-scheme:dark }
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55}
+.wrap{max-width:1200px;margin:0 auto;padding-inline:16px;padding-block:28px 56px}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+
+header.top{display:grid;gap:10px;margin-bottom:22px}
+.eyebrow{font-family:var(--f-display);font-stretch:90%;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3)}
+h1{font-family:var(--f-display);font-stretch:72%;font-weight:800;font-size:clamp(2.1rem,5.4vw,3.6rem);line-height:1;margin:0;text-wrap:balance;letter-spacing:-.01em}
+.lede{margin:0;max-width:64ch;color:var(--ink2);font-size:1.05rem}
+.lede b{font-weight:700}
+.lede .g{color:var(--gew)} .lede .s{color:var(--sch)} .lede .v{color:var(--ver)}
+
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:22px;overflow-x:auto;scrollbar-width:none}
+.tab{appearance:none;border:0;background:none;padding:10px 14px 12px;font-family:var(--f-display);font-stretch:88%;font-weight:600;font-size:1rem;color:var(--ink3);border-bottom:3px solid transparent;margin-bottom:-1px;cursor:pointer;white-space:nowrap}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+.tab:hover{color:var(--ink)}
+
+h2{font-family:var(--f-display);font-stretch:80%;font-weight:700;font-size:1.6rem;line-height:1.1;margin:0;text-wrap:balance}
+h3{font-family:var(--f-display);font-stretch:85%;font-weight:700;font-size:1.25rem;line-height:1.15;margin:0;text-wrap:balance}
+p{margin:0}
+.muted{color:var(--ink2)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px}
+
+.modelgrid{display:grid;gap:18px;grid-template-columns:1fr}
+@media (min-width:920px){.modelgrid{grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);align-items:start}}
+.figure{padding:12px;display:grid;gap:12px;min-width:0}
+.dia{width:100%;height:auto;display:block;border-radius:8px}
+.stepbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.sbtn{appearance:none;border:1.5px solid var(--line);background:var(--surface);border-radius:8px;padding:7px 12px;cursor:pointer;font-weight:700;font-size:.95rem;display:inline-flex;align-items:center;gap:6px}
+.sbtn:hover{border-color:var(--ink3)}
+.sbtn:disabled{opacity:.4;cursor:default}
+.sbtn.primary{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.sbtn[aria-pressed="true"]{background:var(--surface2);border-color:var(--ink)}
+.dots{display:flex;gap:6px}
+.sdot{appearance:none;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);cursor:pointer;font-family:var(--f-display);font-weight:700;font-variant-numeric:tabular-nums}
+.sdot[aria-current="step"]{background:var(--ink);border-color:var(--ink);color:var(--surface)}
+.sdot.done{border-color:var(--ink)}
+.spacer{flex:1}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.88rem;color:var(--ink2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend svg{flex:none}
+.filters{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:.9rem;color:var(--ink2)}
+.fchip{appearance:none;border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;cursor:pointer;font-weight:700;font-size:.88rem;display:inline-flex;gap:6px;align-items:center}
+.fchip .dot{width:10px;height:10px;border-radius:50%}
+.fchip[aria-pressed="true"][data-f="gew"]{border-color:var(--gew);background:var(--gew-soft)}
+.fchip[aria-pressed="true"][data-f="sch"]{border-color:var(--sch);background:var(--sch-soft)}
+.fchip[aria-pressed="true"][data-f="ver"]{border-color:var(--ver);background:var(--ver-soft)}
+.fchip[aria-pressed="true"][data-f="alle"]{border-color:var(--ink)}
+
+.reader{display:grid;gap:14px;min-width:0}
+.stepcard{padding:20px;display:grid;gap:10px;border-top:5px solid var(--mc,var(--ink))}
+.stepno{font-family:var(--f-display);font-stretch:90%;font-weight:600;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mc,var(--ink3))}
+.stepcard .txt{font-size:1.02rem}
+.example{background:var(--surface2);border-radius:8px;padding:10px 12px;font-size:.95rem}
+.example b{font-family:var(--f-display);font-stretch:90%;letter-spacing:.02em}
+.termcard{padding:16px 20px;display:grid;gap:8px;background:var(--surface2);border-color:transparent}
+.termcard h4{margin:0;font-family:var(--f-display);font-stretch:88%;font-size:1.12rem;line-height:1.2}
+.termcard .hint{color:var(--ink2);font-size:.95rem}
+.termcard dl{margin:0;display:grid;gap:6px}
+.termcard dt{font-weight:700;font-size:.85rem;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em}
+.termcard dd{margin:0}
+.kbd{font-size:.82rem;color:var(--ink3)}
+.gchip{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;font-weight:700;padding:2px 10px;border-radius:999px;width:fit-content;font-family:var(--f-display);letter-spacing:.04em}
+.gchip.gew{background:var(--gew-soft);color:var(--gew)} .gchip.sch{background:var(--sch-soft);color:var(--sch)} .gchip.ver{background:var(--ver-soft);color:var(--ver)}
+.ichip{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;font-weight:700;padding:2px 10px;border-radius:999px;width:fit-content;border:1.5px solid var(--ink2);color:var(--ink)}
+.ichip.int{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.ichip.nint{border-style:dashed;color:var(--ink2)}
+.linkbtn{appearance:none;background:none;border:0;padding:0;color:var(--focus);font-weight:700;cursor:pointer;text-decoration:underline;text-underline-offset:3px;width:fit-content}
+
+/* diagram internals */
+.dia text{font-family:var(--f-body);fill:var(--ink)}
+.dia .num{font-family:var(--f-display);font-weight:800;font-size:12px;fill:var(--on);pointer-events:none}
+.dia .lab{font-size:13px;font-weight:700;paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round;pointer-events:none}
+.dia .lab.sm{font-size:12px}
+.dia .big{font-family:var(--f-display);font-stretch:85%;font-weight:700;font-size:15px;letter-spacing:.14em;fill:var(--ink3)}
+.dia .perilab{font-style:italic;font-weight:700;font-size:13px;fill:var(--ver);paint-order:stroke;stroke:var(--peri);stroke-width:4px;pointer-events:none}
+.dia .hit{fill:none;stroke:transparent;stroke-width:16;pointer-events:stroke}
+.dia .el{opacity:0;transition:opacity .5s ease}
+.dia .el.on{opacity:1}
+.dia .el.on.dim{opacity:.25}
+.dia .el:not(.on){pointer-events:none}
+.dia .mk{transition:opacity .4s ease}
+#gdia[data-step="2"] .mk.gew{opacity:.4}
+#gdia[data-step="3"] .mk{opacity:.35}
+#gdia[data-filter="gew"] .mk:not(.gew),#gdia[data-filter="sch"] .mk:not(.sch),#gdia[data-filter="ver"] .mk{opacity:.12}
+#gdia[data-filter="gew"] .net-s,#gdia[data-filter="sch"] .net-g,#gdia[data-filter="ver"] .net{opacity:.08}
+.dia .net{transition:opacity .4s ease}
+.dia [data-term]{cursor:pointer;outline:none}
+.dia [data-term]:hover,.dia [data-term].sel,.dia [data-term]:focus-visible{filter:drop-shadow(0 0 3px var(--focus)) drop-shadow(0 0 1px var(--focus))}
+@media (prefers-reduced-motion:reduce){.dia .el,.dia .mk{transition:none}}
+
+/* city */
+.toggles{display:flex;flex-wrap:wrap;gap:8px}
+#city .links,#city .wall{opacity:0;transition:opacity .4s ease;pointer-events:none}
+#city.show-links .links,#city.show-walls .wall{opacity:1}
+#city .ni,#city .frag{transition:opacity .4s ease,filter .4s ease}
+#city.investor .ni{opacity:.18;filter:grayscale(1)}
+#city.investor .nilab{opacity:.2}
+#city .blank{opacity:0;transition:opacity .4s ease;pointer-events:none}
+#city.investor .blank{opacity:1}
+.viewswap{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.zoomnote{font-size:.9rem;color:var(--ink2)}
+
+/* dynamik */
+.dyngrid{display:grid;gap:18px;grid-template-columns:1fr}
+@media (min-width:920px){.dyngrid{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);align-items:start}}
+.places{display:flex;flex-wrap:wrap;gap:8px}
+.pbtn{appearance:none;border:1.5px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 12px;cursor:pointer;text-align:left;display:grid;gap:0;min-width:0}
+.pbtn b{font-family:var(--f-display);font-stretch:88%;font-size:1rem}
+.pbtn span{font-size:.8rem;color:var(--ink3)}
+.pbtn[aria-pressed="true"]{border-color:var(--ink);background:var(--surface2)}
+.dyncard{padding:18px;display:grid;gap:14px;min-width:0}
+.gauge{position:relative;padding-top:30px}
+.bands{display:grid;grid-template-columns:1fr 1fr 1fr;border-radius:8px;overflow:hidden;height:48px}
+.bands div{display:flex;align-items:center;justify-content:center;text-align:center;font-family:var(--f-display);font-stretch:85%;font-weight:700;font-size:.85rem;line-height:1.1;padding:4px}
+.b-ver{background:var(--ver-soft);color:var(--ver)} .b-sch{background:var(--sch-soft);color:var(--sch)} .b-gew{background:var(--gew-soft);color:var(--gew)}
+.pin{position:absolute;top:0;transform:translateX(-50%);transition:left .7s cubic-bezier(.3,.7,.3,1);display:grid;justify-items:center}
+.pin i{display:block;width:2px;height:62px;background:var(--ink)}
+.pin b{font-family:var(--f-display);font-size:.78rem;background:var(--ink);color:var(--surface);padding:1px 8px;border-radius:999px;white-space:nowrap}
+@media (prefers-reduced-motion:reduce){.pin{transition:none}}
+.status{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:baseline}
+.status .now{font-family:var(--f-display);font-stretch:80%;font-weight:700;font-size:1.6rem;line-height:1.1}
+.events{display:grid;gap:8px}
+.evbtn{appearance:none;border:1.5px solid var(--line);background:var(--surface);border-radius:10px;padding:10px 14px;cursor:pointer;text-align:left;display:flex;gap:10px;align-items:flex-start;font-size:.97rem}
+.evbtn:hover:not(:disabled){border-color:var(--ink3)}
+.evbtn:disabled{cursor:default;opacity:.45}
+.evbtn .tag{flex:none;font-family:var(--f-display);font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:6px;padding:2px 6px;margin-top:2px}
+.tag.up{background:var(--gew-soft);color:var(--gew)} .tag.down{background:var(--ver-soft);color:var(--ver)}
+.log{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+.log li{padding:12px 14px;border-radius:10px;background:var(--surface2);font-size:.95rem;display:grid;gap:4px}
+.log li b{font-family:var(--f-display);font-stretch:90%}
+.log li.jump{border-left:4px solid var(--ink)}
+.log .empty{background:none;border:1.5px dashed var(--line);color:var(--ink3)}
+.why{padding:18px 20px;display:grid;gap:8px}
+.why ul{margin:0;padding-left:1.1em;display:grid;gap:6px}
+
+/* quiz */
+.quizhead{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:16px}
+.score{font-family:var(--f-display);font-stretch:85%;font-weight:700;font-size:1.15rem;font-variant-numeric:tabular-nums}
+.bar{height:8px;border-radius:4px;background:var(--surface2);overflow:hidden;min-width:160px;flex:1;max-width:320px;display:flex}
+.bar i{display:block;height:100%}
+.qsec{display:grid;gap:10px;margin-bottom:22px}
+.qgrid{display:grid;gap:12px;grid-template-columns:1fr}
+@media (min-width:760px){.qgrid{grid-template-columns:1fr 1fr}}
+.q{padding:16px 18px;display:grid;gap:12px;align-content:start}
+.q .stmt{font-size:1.02rem}
+.q .btns{display:flex;flex-wrap:wrap;gap:8px}
+.qb{appearance:none;border:1.5px solid var(--line);background:var(--surface);border-radius:8px;padding:7px 12px;cursor:pointer;font-weight:700;display:inline-flex;gap:8px;align-items:center;font-size:.93rem}
+.qb .dot{width:10px;height:10px;border-radius:50%}
+.qb:hover:not(:disabled){border-color:var(--ink3)}
+.qb:disabled{cursor:default;opacity:.5}
+.qb.picked{opacity:1;border-color:var(--ink)}
+.q.right{border-color:var(--good)} .q.wrong{border-color:var(--bad)}
+.fb{font-size:.95rem}
+.fb strong{margin-right:4px}
+.q.right .fb strong{color:var(--good)} .q.wrong .fb strong{color:var(--bad)}
+footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-size:.85rem;color:var(--ink3);display:grid;gap:4px;max-width:80ch}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">Erdkunde Q1 · Globalisierung und Entwicklung</div>
+    <h1>Die Welt in Fragmenten</h1>
+    <p class="lede">Fred Scholz beschreibt, wie die Globalisierung nur ausgewählte Orte erfasst: <b class="g">Gewinner</b>, <b class="s">Scheingewinner</b> und <b class="v">Verlierer</b> liegen oft im selben Land, sogar in derselben Stadt. Baue das Modell Schritt für Schritt auf, zoome in eine Stadt und teste, wie stabil die Stellung eines Ortes ist.</p>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Bereiche">
+    <button class="tab" role="tab" id="t-global" data-tab="global" aria-controls="p-global" aria-selected="true">1 · Globale Fragmentierung</button>
+    <button class="tab" role="tab" id="t-lokal" data-tab="lokal" aria-controls="p-lokal" aria-selected="false" tabindex="-1">2 · Lokale Fragmentierung</button>
+    <button class="tab" role="tab" id="t-dynamik" data-tab="dynamik" aria-controls="p-dynamik" aria-selected="false" tabindex="-1">3 · Gewinner auf Zeit?</button>
+    <button class="tab" role="tab" id="t-ueben" data-tab="ueben" aria-controls="p-ueben" aria-selected="false" tabindex="-1">4 · Üben</button>
+  </nav>
+
+  <!-- 1 Global -->
+  <section class="panel" id="p-global" role="tabpanel" aria-labelledby="t-global">
+    <div class="modelgrid">
+      <div class="card figure">
+        <div id="gHost"></div>
+        <div class="stepbar">
+          <button class="sbtn" id="gPrev" aria-label="Vorheriger Schritt">‹ Zurück</button>
+          <div class="dots" id="gDots"></div>
+          <button class="sbtn primary" id="gNext">Weiter ›</button>
+          <span class="spacer"></span>
+          <button class="sbtn" id="gAllBtn" aria-pressed="false">Gesamtbild</button>
+        </div>
+        <div class="filters" role="group" aria-label="Gruppe hervorheben">
+          <span>Hervorheben:</span>
+          <button class="fchip" data-f="alle" aria-pressed="true">alle</button>
+          <button class="fchip" data-f="gew" aria-pressed="false"><span class="dot" style="background:var(--gew)"></span>Gewinner</button>
+          <button class="fchip" data-f="sch" aria-pressed="false"><span class="dot" style="background:var(--sch)"></span>Scheingewinner</button>
+          <button class="fchip" data-f="ver" aria-pressed="false"><span class="dot" style="background:var(--ver)"></span>Verlierer</button>
+        </div>
+        <div class="legend">
+          <span><svg width="26" height="20" viewBox="0 0 26 20" aria-hidden="true"><path d="M4,8 v5 a9,4.5 0 0 0 18,0 v-5" style="fill:var(--surface);stroke:var(--gew)" stroke-width="1.4"/><ellipse cx="13" cy="8" rx="9" ry="4.5" style="fill:var(--gew)"/></svg>globaler Ort (1–3)</span>
+          <span><svg width="26" height="20" viewBox="0 0 26 20" aria-hidden="true"><ellipse cx="13" cy="10" rx="10" ry="6" style="fill:var(--sch)"/></svg>globalisierter Ort (4–9)</span>
+          <span><svg width="26" height="20" viewBox="0 0 26 20" aria-hidden="true"><rect x="2" y="3" width="22" height="14" rx="3" style="fill:var(--peri);stroke:var(--hatch)"/></svg>neue Peripherie</span>
+          <span><svg width="26" height="20" viewBox="0 0 26 20" aria-hidden="true"><rect x="0" y="0" width="26" height="20" rx="3" style="fill:var(--peri)"/><path d="M2,14 L9,8 L16,11 L24,5" fill="none" style="stroke:var(--bline)" stroke-width="2.5"/></svg>Staatsgrenze</span>
+        </div>
+      </div>
+      <div class="reader">
+        <div class="card stepcard" id="gStep" aria-live="polite"></div>
+        <div class="card termcard" id="gTerm" aria-live="polite">
+          <span class="eyebrow">Fachbegriff</span>
+          <p class="hint">Tippe in der Grafik auf eine Nummer, eine Fläche oder eine Linie. Hier erscheint dann, was sie bedeutet, mit Beispielen.</p>
+        </div>
+        <p class="kbd">Tastatur: Pfeiltasten ← → blättern durch die Schritte.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 Lokal -->
+  <section class="panel" id="p-lokal" role="tabpanel" aria-labelledby="t-lokal" hidden>
+    <div class="modelgrid">
+      <div class="card figure">
+        <div class="viewswap">
+          <h3 id="cityTitle" style="flex:1;min-width:0">Eine globalisierte Stadt</h3>
+          <button class="sbtn" id="zoomBtn">Ins Wirtschaftsfragment zoomen ›</button>
+        </div>
+        <div id="cityWrap">
+        <svg id="city" class="dia" viewBox="0 0 820 500" role="img" aria-label="Schema einer globalisierten Stadt mit ihren Fragmenten">
+          <defs>
+            <pattern id="slumPat" width="9" height="9" patternUnits="userSpaceOnUse"><rect width="9" height="9" style="fill:var(--f-sl)"/><rect x="1" y="1" width="3.5" height="3" style="fill:var(--f-wo)"/><rect x="5.5" y="4.5" width="2.5" height="3.5" style="fill:var(--f-wo)"/></pattern>
+            <pattern id="blankPat" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" style="fill:var(--surface)"/><line x1="0" y1="0" x2="0" y2="8" style="stroke:var(--line)" stroke-width="2"/></pattern>
+            <marker id="arrC" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" style="fill:var(--ink)"/></marker>
+          </defs>
+          <rect width="820" height="500" style="fill:var(--land)"/>
+          <path d="M745,0 C722,120 760,220 732,300 S762,430 742,500 L820,500 L820,0Z" style="fill:var(--sea)"/>
+          <text x="785" y="470" class="lab sm" text-anchor="middle" style="fill:var(--ink2)">Meer</text>
+
+          <!-- Stadtfläche: Wohn- und Gewerbegebiete -->
+          <path class="frag ni" data-term="wohn" tabindex="0" role="button" aria-label="Wohn- und Gewerbegebiete" d="M95,175 C125,95 265,65 385,85 S610,75 690,150 S728,320 700,420 S480,480 330,462 S110,432 80,342 S65,235 95,175Z" style="fill:var(--f-wo)"/>
+          <path d="M0,330 C140,300 250,390 380,365 S600,330 745,392" fill="none" style="stroke:var(--sea)" stroke-width="16" stroke-linecap="round" pointer-events="none"/>
+
+          <!-- Slums -->
+          <g class="frag ni" data-term="slum" tabindex="0" role="button" aria-label="Hütten- und Slumviertel">
+            <path d="M118,322 C150,298 215,318 242,345 C252,372 200,387 160,377 C124,369 104,346 118,322Z" style="fill:url(#slumPat)"/>
+            <path d="M390,380 C430,372 480,360 520,372 C532,395 470,411 420,409 C394,406 380,392 390,380Z" style="fill:url(#slumPat)"/>
+            <path d="M560,410 C600,395 650,400 670,420 C660,446 600,453 570,441 C554,433 551,420 560,410Z" style="fill:url(#slumPat)"/>
+            <path d="M236,150 C262,139 292,150 292,171 C286,192 250,194 236,181 C225,171 226,158 236,150Z" style="fill:url(#slumPat)"/>
+          </g>
+
+          <!-- Altstadt -->
+          <g class="frag ni" data-term="zentrum" tabindex="0" role="button" aria-label="Traditionelles Stadtzentrum">
+            <path d="M235,240 C240,205 290,195 335,205 C375,215 382,260 355,285 C320,306 255,296 238,270Z" style="fill:var(--f-ze)"/>
+            <path d="M250,230 L290,250 L285,280 M290,250 L340,235 L350,265 M300,215 L290,250 M320,285 L340,235" fill="none" style="stroke:var(--surface)" stroke-width="2" opacity=".7"/>
+          </g>
+
+          <!-- Verwaltung -->
+          <g class="frag ni" data-term="verwaltung" tabindex="0" role="button" aria-label="Verwaltungsviertel">
+            <rect x="305" y="118" width="110" height="52" rx="6" style="fill:var(--f-vw)"/>
+            <g style="fill:var(--surface)" opacity=".6"><rect x="313" y="124" width="16" height="10" rx="1"/><rect x="391" y="124" width="16" height="10" rx="1"/><rect x="313" y="154" width="16" height="10" rx="1"/><rect x="391" y="154" width="16" height="10" rx="1"/></g>
+          </g>
+
+          <!-- Gated Community -->
+          <g class="frag intg" data-term="villen" tabindex="0" role="button" aria-label="Villenviertel, Gated Community">
+            <ellipse cx="160" cy="118" rx="62" ry="36" style="fill:var(--f-vi)"/>
+            <ellipse cx="140" cy="122" rx="26" ry="14" style="fill:var(--f-vi2)"/>
+            <path d="M146,110 v14" style="stroke:var(--ink)" stroke-width="1.5"/><path d="M146,110 l8,3 -8,3z" style="fill:var(--gew)"/>
+            <g style="fill:var(--surface)"><rect x="180" y="100" width="9" height="7"/><rect x="194" y="110" width="9" height="7"/><rect x="178" y="124" width="9" height="7"/><rect x="195" y="128" width="9" height="7"/><rect x="118" y="98" width="9" height="7"/></g>
+          </g>
+
+          <!-- Wirtschaftsfragment -->
+          <g class="frag intg" data-term="wirtschaft" tabindex="0" role="button" aria-label="Wirtschaftsfragment">
+            <ellipse cx="505" cy="242" rx="74" ry="30" style="fill:var(--f-wi2)"/>
+            <g style="fill:var(--f-wi)">
+              <rect x="455" y="200" width="14" height="42"/><rect x="471" y="175" width="16" height="67"/><rect x="490" y="150" width="18" height="92"/><rect x="511" y="165" width="16" height="77"/><rect x="530" y="185" width="15" height="57"/><rect x="548" y="206" width="12" height="36"/>
+            </g>
+            <g style="fill:var(--surface)" opacity=".45"><rect x="493" y="156" width="4" height="80"/><rect x="474" y="181" width="3" height="56"/><rect x="514" y="171" width="3" height="66"/></g>
+          </g>
+
+          <!-- Exportproduktionszone -->
+          <g class="frag intg" data-term="export" tabindex="0" role="button" aria-label="Exportproduktionszone">
+            <rect x="592" y="287" width="112" height="68" rx="4" style="fill:var(--f-ex)"/>
+            <g style="fill:var(--f-ex2)"><rect x="600" y="296" width="44" height="22" rx="2"/><rect x="652" y="296" width="44" height="22" rx="2"/><rect x="600" y="325" width="96" height="22" rx="2"/></g>
+            <g style="fill:var(--ink3)"><rect x="704" y="298" width="30" height="5"/><rect x="704" y="318" width="34" height="5"/><rect x="704" y="338" width="28" height="5"/></g>
+          </g>
+
+          <!-- Flughafen -->
+          <g class="frag intg" data-term="flughafen" tabindex="0" role="button" aria-label="Flughafen und Hafen">
+            <rect x="540" y="47" width="150" height="14" rx="2" transform="rotate(-10 615 54)" style="fill:var(--ink3)"/>
+            <path d="M555,56 L675,35" style="stroke:var(--surface)" stroke-width="1.5" stroke-dasharray="8 6" transform="rotate(0)"/>
+            <rect x="598" y="68" width="40" height="12" rx="2" style="fill:var(--ink2)"/>
+          </g>
+
+          <!-- Schnellstraßen -->
+          <g class="frag intg" data-term="schnellstrasse" tabindex="0" role="button" aria-label="Schnellstraßen">
+            <path d="M616,80 C595,125 565,165 545,196 M552,245 C590,262 618,272 640,287 M466,206 C432,100 300,72 222,106" fill="none" style="stroke:var(--ink2)" stroke-width="8" stroke-linecap="round"/>
+            <path d="M616,80 C595,125 565,165 545,196 M552,245 C590,262 618,272 640,287 M466,206 C432,100 300,72 222,106" fill="none" style="stroke:var(--surface)" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M616,80 C595,125 565,165 545,196 M552,245 C590,262 618,272 640,287 M466,206 C432,100 300,72 222,106" class="hit"/>
+          </g>
+
+          <!-- Investorenblick: weiße Flecken -->
+          <g class="blank">
+            <text x="175" y="250" class="lab" text-anchor="middle" style="fill:var(--ink3)">für Investoren</text>
+            <text x="175" y="266" class="lab" text-anchor="middle" style="fill:var(--ink3)">uninteressant</text>
+          </g>
+
+          <!-- Mauern -->
+          <g class="wall">
+            <ellipse cx="160" cy="118" rx="66" ry="40" fill="none" style="stroke:var(--ink)" stroke-width="3.5" stroke-dasharray="2 5" stroke-linecap="round"/>
+            <rect x="587" y="282" width="122" height="78" rx="6" fill="none" style="stroke:var(--ink)" stroke-width="3.5" stroke-dasharray="2 5" stroke-linecap="round"/>
+            <ellipse cx="507" cy="232" rx="82" ry="46" fill="none" style="stroke:var(--ink)" stroke-width="2" stroke-dasharray="2 6" stroke-linecap="round" opacity=".6"/>
+            <text x="160" y="172" class="lab sm" text-anchor="middle">Mauer, Wachdienst</text>
+            <text x="648" y="275" class="lab sm" text-anchor="middle">Zaun, Zollgrenze</text>
+          </g>
+
+          <!-- Globale Verflechtungen -->
+          <g class="links">
+            <path d="M160,80 C300,-8 600,-8 796,18" fill="none" style="stroke:var(--ink)" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrC)"/>
+            <path d="M505,148 C600,92 700,44 796,20" fill="none" style="stroke:var(--ink)" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrC)"/>
+            <path d="M650,44 C720,30 760,24 796,21" fill="none" style="stroke:var(--ink)" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrC)"/>
+            <path d="M735,310 C790,225 810,130 805,30" fill="none" style="stroke:var(--ink)" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrC)"/>
+            <text x="812" y="48" class="lab sm" text-anchor="end">zu globalen</text>
+            <text x="812" y="62" class="lab sm" text-anchor="end">Orten weltweit</text>
+          </g>
+
+          <!-- Beschriftungen -->
+          <text x="160" y="72" class="lab" text-anchor="middle">Gated Community</text>
+          <text x="360" y="149" class="lab sm nilab" text-anchor="middle">Verwaltung</text>
+          <text x="306" y="256" class="lab sm nilab" text-anchor="middle">Altstadt</text>
+          <text x="505" y="290" class="lab" text-anchor="middle">Wirtschaftsfragment</text>
+          <text x="648" y="378" class="lab" text-anchor="middle">Exportproduktionszone</text>
+          <text x="615" y="100" class="lab sm" text-anchor="middle">Flughafen</text>
+          <text x="752" y="292" class="lab sm" text-anchor="middle">Hafen</text>
+          <text x="175" y="402" class="lab sm nilab" text-anchor="middle">Slum</text>
+          <text x="455" y="428" class="lab sm nilab" text-anchor="middle">Slum</text>
+          <text x="150" y="222" class="lab sm nilab" text-anchor="middle">Wohn- und</text>
+          <text x="150" y="236" class="lab sm nilab" text-anchor="middle">Gewerbegebiete</text>
+          <text x="330" y="94" class="lab sm" text-anchor="middle" style="fill:var(--ink2)">Schnellstraße</text>
+        </svg>
+        </div>
+        <div id="innerWrap" hidden>
+        <svg id="inner" class="dia" viewBox="0 0 820 420" role="img" aria-label="Innenansicht des Wirtschaftsfragments">
+          <rect width="820" height="420" style="fill:var(--land)"/>
+          <g data-term="worker" tabindex="0" role="button" aria-label="Arbeiterunterkünfte">
+            <path d="M50,250 v22 a360,110 0 0 0 720,0 v-22" style="fill:var(--f-wi2)"/>
+            <ellipse cx="410" cy="250" rx="360" ry="110" style="fill:var(--f-ar);stroke:var(--f-wi)" stroke-width="1.5"/>
+          </g>
+          <g data-term="hall" tabindex="0" role="button" aria-label="Werkhallen modern und traditionell">
+            <g fill="none" style="stroke:var(--f-wi)" stroke-width="2.2">
+              <circle cx="180" cy="300" r="10"/><circle cx="192" cy="300" r="10"/>
+              <circle cx="520" cy="330" r="10"/><circle cx="532" cy="330" r="10"/>
+              <circle cx="700" cy="255" r="10"/><circle cx="712" cy="255" r="10"/>
+              <circle cx="120" cy="255" r="10"/><circle cx="640" cy="305" r="10"/><circle cx="300" cy="325" r="10"/><circle cx="410" cy="340" r="10"/>
+            </g>
+          </g>
+          <g data-term="home" tabindex="0" role="button" aria-label="Heimarbeit">
+            <g fill="none" style="stroke:var(--ink)" stroke-width="2" stroke-linejoin="round">
+              <path d="M80,242 l8,-13 8,13z"/><path d="M92,288 l8,-13 8,13z"/><path d="M732,246 l8,-13 8,13z"/><path d="M246,352 l8,-13 8,13z"/><path d="M570,348 l8,-13 8,13z"/><path d="M660,340 l8,-13 8,13z"/>
+            </g>
+          </g>
+          <g data-term="apart" tabindex="0" role="button" aria-label="Villen und Apartments">
+            <path d="M210,200 v18 a200,55 0 0 0 400,0 v-18" style="fill:var(--f-wi2)"/>
+            <ellipse cx="410" cy="200" rx="200" ry="55" style="fill:var(--f-ap)"/>
+          </g>
+          <g data-term="office" tabindex="0" role="button" aria-label="Bürohochhäuser und Head-Offices">
+            <path d="M325,150 v42 a85,22 0 0 0 170,0 v-42" style="fill:var(--f-wi)"/>
+            <ellipse cx="410" cy="150" rx="85" ry="22" style="fill:var(--f-wi2)"/>
+          </g>
+          <path d="M495,142 L520,120" style="stroke:var(--ink2)" stroke-width="1.2"/>
+          <text x="524" y="118" class="lab">Bürohochhäuser, Head-Offices</text>
+          <path d="M598,192 L626,172" style="stroke:var(--ink2)" stroke-width="1.2"/>
+          <text x="630" y="170" class="lab">Villen, Apartments</text>
+          <text x="410" y="408" class="lab" text-anchor="middle">Arbeiterunterkünfte</text>
+          <path d="M122,244 L128,202" style="stroke:var(--ink2)" stroke-width="1.2"/>
+          <text x="128" y="196" class="lab" text-anchor="middle">Werkhallen</text>
+          <path d="M740,230 L742,210" style="stroke:var(--ink2)" stroke-width="1.2"/>
+          <text x="742" y="202" class="lab" text-anchor="middle">Heimarbeit</text>
+          <text x="410" y="40" class="big" text-anchor="middle">IM INNEREN DES WIRTSCHAFTSFRAGMENTS</text>
+        </svg>
+        </div>
+        <div class="toggles" id="cityToggles">
+          <button class="sbtn" data-t="show-links" aria-pressed="false">Globale Verflechtungen</button>
+          <button class="sbtn" data-t="show-walls" aria-pressed="false">Mauern und Zäune</button>
+          <button class="sbtn" data-t="investor" aria-pressed="false">Blick der Investoren</button>
+        </div>
+        <div class="legend" id="cityLegend">
+          <span><svg width="18" height="14" aria-hidden="true"><rect width="18" height="14" rx="3" style="fill:var(--f-wi)"/></svg>Wirtschaftsfragment</span>
+          <span><svg width="18" height="14" aria-hidden="true"><rect width="18" height="14" rx="3" style="fill:var(--f-ex)"/></svg>Exportproduktionszone</span>
+          <span><svg width="18" height="14" aria-hidden="true"><rect width="18" height="14" rx="3" style="fill:var(--f-vi)"/></svg>Villenviertel</span>
+          <span><svg width="18" height="14" aria-hidden="true"><rect width="18" height="14" rx="3" style="fill:var(--f-ze)"/></svg>Altstadt</span>
+          <span><svg width="18" height="14" aria-hidden="true"><rect width="18" height="14" rx="3" style="fill:var(--f-vw)"/></svg>Verwaltung</span>
+          <span><svg width="18" height="14" aria-hidden="true"><rect width="18" height="14" rx="3" style="fill:var(--f-wo)"/></svg>Wohn-, Gewerbegebiete</span>
+          <span><svg width="18" height="14" aria-hidden="true"><rect width="18" height="14" rx="3" style="fill:url(#slumPat)"/></svg>Hütten-, Slumviertel</span>
+        </div>
+      </div>
+      <div class="reader">
+        <div class="card stepcard" style="--mc:var(--sch)">
+          <span class="stepno">Zoom: von der Welt in die Stadt</span>
+          <h3>Fragmentierung auch vor Ort</h3>
+          <p class="txt">Ein globalisierter Ort ist kein einheitlicher Raum. Nur einzelne Viertel sind an die Weltwirtschaft angeschlossen. Daneben liegen Viertel, die kaum etwas davon haben. Scholz nennt das <b>lokale Fragmentierung</b>.</p>
+          <p class="muted">Tippe ein Viertel an. Schalte dann die Verflechtungen, die Mauern und den Blick der Investoren zu.</p>
+        </div>
+        <div class="card termcard" id="cTerm" aria-live="polite">
+          <span class="eyebrow">Fragment</span>
+          <p class="hint">Noch nichts ausgewählt. Tippe in der Karte auf ein Viertel.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 Dynamik -->
+  <section class="panel" id="p-dynamik" role="tabpanel" aria-labelledby="t-dynamik" hidden>
+    <div style="display:grid;gap:8px;margin-bottom:16px;max-width:70ch">
+      <h2>Gewinner auf Zeit?</h2>
+      <p class="muted">Die Einteilung ist keine feste Rangliste. Unternehmen verlagern ihre Standorte, Preise schwanken, Technik verändert Arbeit. Wähle einen Ort und löse Ereignisse aus. Beobachte, wohin er rutscht.</p>
+    </div>
+    <div class="places" id="places" role="group" aria-label="Ort wählen" style="margin-bottom:16px"></div>
+    <div class="dyngrid">
+      <div class="card dyncard">
+        <div class="status"><span class="eyebrow" id="dPlaceType"></span></div>
+        <div class="status"><span class="now" id="dNow"></span><span class="muted" id="dPlaceEx"></span></div>
+        <div class="gauge" aria-hidden="true">
+          <div class="pin" id="pin"><b id="pinLab">Ort</b><i></i></div>
+          <div class="bands"><div class="b-ver">Neue Peripherie</div><div class="b-sch">Globalisierter Ort</div><div class="b-gew">Globaler Ort</div></div>
+        </div>
+        <h3>Ereignisse</h3>
+        <div class="events" id="events"></div>
+        <div><button class="sbtn" id="dReset">Ort zurücksetzen</button></div>
+      </div>
+      <div class="reader">
+        <div class="card why" style="padding:18px">
+          <h3>Was ist passiert?</h3>
+          <ul class="log" id="log"></ul>
+        </div>
+        <div class="card why">
+          <h3>Warum ist die Stellung so unsicher?</h3>
+          <ul>
+            <li><b>Kapital ist mobil, Menschen kaum.</b> Ein Konzern kann ein Werk in wenigen Monaten verlagern. Die Beschäftigten bleiben zurück (englisch: footloose industries).</li>
+            <li><b>Standortkonkurrenz.</b> Viele Orte bieten dieselbe Leistung an. Den Auftrag bekommt, wer am billigsten oder am besten ist.</li>
+            <li><b>Entschieden wird woanders.</b> Globalisierte Orte führen aus. Die Zentralen in den globalen Orten entscheiden.</li>
+            <li><b>Aufstieg ist möglich.</b> Wer eigene Forschung, Ausbildung und Weiterverarbeitung aufbaut, hält mehr Wertschöpfung im Land (Upgrading).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 Üben -->
+  <section class="panel" id="p-ueben" role="tabpanel" aria-labelledby="t-ueben" hidden>
+    <div class="quizhead">
+      <div style="display:grid;gap:6px;max-width:60ch">
+        <h2>Einordnen</h2>
+        <p class="muted">Ordne jedes Beispiel ein. Die Rückmeldung nennt auch den passenden Typ aus dem Modell.</p>
+      </div>
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <span class="score" id="score"></span>
+        <div class="bar" id="bar" aria-hidden="true"></div>
+        <button class="sbtn" id="qReset">Neu mischen</button>
+      </div>
+    </div>
+    <div class="qsec">
+      <h3>A · Globale Ebene: Wer gehört wohin?</h3>
+      <div class="qgrid" id="qA"></div>
+    </div>
+    <div class="qsec">
+      <h3>B · Lokale Ebene: Global integriert oder nicht?</h3>
+      <div class="qgrid" id="qB"></div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Modell nach Fred Scholz, Theorie der fragmentierenden Entwicklung (u. a. Geographische Rundschau 2002, „Geographische Entwicklungsforschung“ 2004). Darstellung didaktisch vereinfacht.</span>
+    <span>Die Grafiken sind Schemata. Weltellipse und Stadt zeigen keine realen Räume. Die genannten Beispiele sind Einordnungsvorschläge zur Diskussion.</span>
+  </footer>
+</div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+
+/* ================= Inhalte ================= */
+const GROUPS={
+  gew:{name:'Gewinner',ort:'Globale Orte / Regionen',en:'Acting Global Cities / Regions'},
+  sch:{name:'Scheingewinner',ort:'Globalisierte Orte / Regionen',en:'Affected Global Cities / Regions'},
+  ver:{name:'Verlierer',ort:'Neue Peripherie',en:'„Neuer Süden“'}
+};
+const TYPES={
+  1:['gew','Kommandozentren der Wirtschaft','Hier sitzen die Zentralen großer Konzerne, Banken, Börsen und Versicherungen. Von hier aus wird entschieden, wo auf der Welt investiert, produziert und verkauft wird.','New York, London, Tokio, Frankfurt am Main, Singapur'],
+  2:['gew','Hightech-Produktions-, Forschungs-, Service- und Innovationszentren','Neue Technologien werden hier entwickelt und hergestellt. Universitäten, Forschungslabore und hochqualifizierte Fachkräfte ballen sich.','Silicon Valley, Großraum München, Shenzhen'],
+  3:['gew','Fordistische Industriezonen','Massenproduktion mit hoher Fertigungstiefe: Viele Arbeitsschritte vom Bauteil bis zum fertigen Produkt finden in der Region statt, etwa in der Autoindustrie. Solche Zonen können absteigen, wenn die Produktion abwandert.','Region Stuttgart, Wolfsburg; früher Detroit'],
+  4:['sch','Hightech-Services','IT-Dienstleistungen, Softwarewartung und Callcenter im Auftrag ausländischer Firmen. Gut bezahlt im Landesvergleich, aber abhängig von den Auftraggebern.','Bengaluru (Indien), Manila (Philippinen)'],
+  5:['sch','Auslagerungsindustrie','Zweigwerke montieren Vorprodukte für Konzerne aus den globalen Orten, oft in Sonderwirtschaftszonen mit Steuervorteilen.','Maquiladoras in Nordmexiko, z. B. Ciudad Juárez'],
+  6:['sch','Billiglohn- und Konsumgüterproduktion','Arbeitsintensive Herstellung von Kleidung, Schuhen oder Spielzeug. Der Standortvorteil sind allein die niedrigen Löhne.','Textilindustrie in Bangladesch'],
+  7:['sch','Rohstoff- und Nahrungsmittelproduktion','Bergbau, Plantagen und Exportlandwirtschaft. Weiterverarbeitet und veredelt wird meist anderswo, der Großteil der Wertschöpfung fließt ab.','Kupferbergbau in Chile, Sojaanbau in Brasilien'],
+  8:['sch','Kinder- und Heimarbeit für den Weltmarkt','Zuarbeit in Wohnungen und kleinen Werkstätten, meist über Zwischenhändler, bezahlt pro Stück und ohne soziale Absicherung.','Teppichknüpfen und Stickereien in Südasien'],
+  9:['sch','Freizeit- und Tourismusenklaven','Abgeschlossene Ferienanlagen, oft von Mauern umgeben und vom Umland getrennt. Ein großer Teil der Einnahmen geht an ausländische Reiseveranstalter und Hotelketten.','Punta Cana (Dominikanische Republik), Resortinseln der Malediven']
+};
+const GTERMS={
+  peri:['ver','Neue Peripherie („Neuer Süden“)','Staaten oder Teile von Staaten, die für die Weltwirtschaft uninteressant sind. Die Menschen gelten dort als „überflüssig“: als Arbeitskräfte, als Kunden mit Kaufkraft und als Produzenten. Für sie ist dieser Raum ein Überlebensraum, geprägt von Subsistenzwirtschaft und informellem Sektor. Die neue Peripherie liegt nicht nur im Globalen Süden.','abgelegene Dörfer im Norden Malis; entvölkerte Dörfer im Landesinneren Spaniens'],
+  ns:[null,'Das alte Bild: Nord-Süd-Gegensatz','Früher verglich man ganze Staaten: reiche Industrieländer im Norden, arme Entwicklungsländer im Süden. Das Modell von Scholz stellt dieses Bild infrage, weil Gewinner und Verlierer heute innerhalb derselben Staaten liegen.',null],
+  grenze:[null,'Staatsgrenzen','Die Linien zeigen Staaten. Im Modell sind sie kaum noch wichtig: Globale Orte, globalisierte Orte und Peripherie liegen innerhalb derselben Grenzen nebeneinander.',null],
+  netz:[null,'Globale Vernetzung','Globale und globalisierte Orte sind über Kapital, Waren, Informationen und Verkehrswege eng miteinander verbunden. Oft enger als mit ihrem eigenen Umland. Die Peripherie bleibt außerhalb dieses Netzes.',null]
+};
+const GSTEPS=[
+  [null,'Das alte Bild: Norden gegen Süden','Lange galt die Welt als zweigeteilt: oben die reichen Industrieländer, unten die armen Entwicklungsländer. Verglichen wurden ganze Staaten, etwa über das Bruttoinlandsprodukt pro Kopf. Scholz sagt: Im Zeitalter der Globalisierung passt dieses Bild nicht mehr.','Nach dem alten Bild wären Singapur oder São Paulo „Süden“ und damit arm.'],
+  ['gew','Globale Orte: die Gewinner','Einige wenige Orte steuern die Weltwirtschaft. Scholz nennt drei Typen: Kommandozentren (1), Hightech- und Forschungszentren (2) und fordistische Industriezonen (3). Die meisten liegen im alten Norden, aber nicht alle.','Singapur ist Finanz- und Handelsdrehscheibe, obwohl es nach dem alten Bild zum Süden gehört.'],
+  ['sch','Globalisierte Orte: die Scheingewinner','Viele Orte sind an den Weltmarkt angeschlossen, aber nur als ausführende Stelle (Typen 4 bis 9). Die Entscheidungen fallen in den globalen Orten. Die Orte sind austauschbar: Die Arbeitsplätze bleiben nur, solange der Standort billig oder günstig gelegen ist. Deshalb sind sie nur scheinbar Gewinner.','Eine Textilfabrik in Bangladesch näht für eine europäische Modemarke. Findet die Marke einen billigeren Standort, zieht sie weiter.'],
+  ['ver','Neue Peripherie: die Verlierer','Alles, was übrig bleibt, gehört zur neuen Peripherie. Diese Räume sind für die Weltwirtschaft uninteressant. Die Menschen dort gelten als „überflüssig“: Man braucht weder ihre Arbeitskraft noch ihre Kaufkraft. Scholz spricht vom „Neuen Süden“, der auch im Norden liegen kann.','Entvölkerte Dörfer im Landesinneren Spaniens liegen in einem reichen EU-Staat und trotzdem abseits.'],
+  [null,'Die fragmentierte Welt','Globale und globalisierte Orte bilden ein Netz. Die Peripherie liegt dazwischen und bleibt ausgeschlossen. Die Grenze zwischen Gewinnern und Verlierern verläuft nicht mehr zwischen Staaten, sondern mitten durch sie hindurch, bis in die einzelne Stadt.',null]
+];
+/* Marker: x, y, Typ (in Weltkoordinaten, Welt wird um 20 nach unten verschoben) */
+const MK=[[150,125,1],[330,92,1],[560,105,1],[640,300,1],[120,190,2],[410,120,2],[690,165,2],[470,330,2],[250,150,3],[510,170,3],[330,300,3],
+  [230,85,9],[470,70,4],[620,85,9],[740,220,5],[590,180,6],
+  [90,260,9],[170,300,5],[250,320,4],[200,360,8],[290,390,6],[380,250,7],[440,270,9],[400,370,4],[520,250,5],[560,330,8],[600,375,9],[700,280,7],[690,330,6],[515,395,8],[350,395,7]];
+
+const LOC={
+  wirtschaft:['int','Wirtschaftsfragment (Geschäftszentrum)','Hochhäuser mit Niederlassungen internationaler Konzerne, Banken, Hotels und Einkaufszentren.','Führungskräfte, Fachkräfte, Expats. Reinigungs- und Sicherheitspersonal pendelt aus anderen Vierteln ein.','Über Schnellstraße, Flughafen und Datenleitungen enger mit London oder Singapur verbunden als mit dem Nachbarviertel.'],
+  export:['int','Exportproduktionszone','Abgegrenztes Gelände, in dem Zweigwerke für den Weltmarkt montieren. Es gibt Steuervorteile und Zollfreiheit, Arbeitsrechte gelten oft nur eingeschränkt.','Viele junge Frauen und Zugewanderte in Schichtarbeit mit niedrigen Löhnen. Das Management kommt meist aus dem Ausland.','Vorprodukte kommen per Schiff, Fertigwaren gehen direkt in den Export. Einheimische Betriebe bekommen kaum Aufträge.'],
+  villen:['int','Villenviertel (Gated Community)','Bewachte Wohnanlage mit Mauer, Kameras, eigener Strom- und Wasserversorgung, Golfplatz und Privatschule. Im Modell heißt sie „Paradies“ oder „Zitadelle“.','Wohlhabende Oberschicht, leitende Angestellte, Expats. Hausangestellte kommen tagsüber aus den Slums.','Abgeschottet von der übrigen Stadt. Lebensstil, Konsum und Ausbildung der Kinder sind global ausgerichtet.'],
+  zentrum:['nint','Traditionelles Stadtzentrum','Altstadt mit Märkten, Handwerk, Kleinhandel und religiösen Bauten.','Händler, Handwerker, alteingesessene Familien.','Versorgt die Stadtbevölkerung, wird vom globalen Geschäft aber umgangen. Teils verfällt die Bausubstanz.'],
+  verwaltung:['nint','Verwaltungsviertel','Ministerien, Behörden und Gerichte.','Staatsbedienstete.','Der Staat setzt den Rahmen, zum Beispiel für Sonderwirtschaftszonen. Auf die Entscheidungen der Konzerne hat er wenig Einfluss.'],
+  wohn:['nint','Wohn- und Gewerbegebiete','Große Wohnviertel der Mittel- und Unterschicht mit Kleinbetrieben und Werkstätten.','Der größte Teil der Stadtbevölkerung.','Von der Weltwirtschaft nur indirekt erfasst. Straßen, Wasser- und Stromversorgung reichen oft nicht aus.'],
+  slum:['nint','Hütten- und Slumviertel','Informelle Siedlungen an Flussufern, Hängen und Bahnlinien, ohne sichere Wasser- und Stromversorgung. Im Modell „Höllen“ oder „Gettos“ genannt.','Zuwanderer vom Land, Tagelöhner, Beschäftigte im informellen Sektor. Manche arbeiten in der Exportzone oder als Hausangestellte in der Gated Community.','Überlebensraum der „Überflüssigen“: die neue Peripherie mitten in der Stadt, oft direkt neben der Gated Community.'],
+  schnellstrasse:['int','Schnellstraßen','Mehrspurige, teils aufgeständerte Straßen.','Pendler aus den integrierten Vierteln, Lieferverkehr.','Sie verbinden die integrierten Fragmente mit Flughafen und Hafen und führen an den Slums vorbei oder über sie hinweg.'],
+  flughafen:['int','Flughafen und Hafen','Knotenpunkte des Welthandels und des Reiseverkehrs.','Geschäftsreisende, Touristen, Logistikfirmen.','Über sie fließen Kapital, Waren und Menschen zu den globalen Orten weltweit.'],
+  office:['int','Bürohochhäuser, Head-Offices','Regionale Zentralen internationaler Firmen, Banken und Beratungen.','Führungskräfte mit internationaler Ausbildung.','Die Verbindung zu den Kommandozentren (Typ 1). Hier kommen die Anweisungen an.'],
+  apart:['int','Villen und Apartments','Moderne Wohnungen und Häuser in der Nähe der Büros.','Fach- und Führungskräfte, oft Expats.','Hoher Lebensstandard, getrennt von den Arbeiterunterkünften.'],
+  worker:['teil','Arbeiterunterkünfte','Wohnheime und einfache Quartiere, eng und oft ohne Privatsphäre.','Arbeiterinnen und Arbeiter der Werkhallen, viele davon Zugewanderte.','Sie gehören zum Fragment, haben aber nur über ihren unsicheren Arbeitsplatz Anteil daran.'],
+  hall:['teil','Werkhallen, modern und traditionell','Doppelkreis: moderne Fertigung für den Weltmarkt. Einfacher Kreis: traditionelle Werkstätten mit veralteter Technik.','Kernbelegschaft in den modernen Hallen, Leih- und Tagesarbeiter in den traditionellen.','Die traditionellen Betriebe sind oft Zulieferer mit geringer Bezahlung und fallen als Erste weg.'],
+  home:['teil','Heimarbeit','Frauen und Kinder fertigen zu Hause Teile im Auftrag von Subunternehmern.','Familien aus den ärmsten Haushalten.','Bezahlt wird pro Stück, ohne Vertrag und Absicherung. Die Fragmentierung reicht bis in die einzelne Wohnung.']
+};
+const INTLAB={int:'global integriert',teil:'nur teilweise integriert',nint:'nicht integriert'};
+
+const PLACES=[
+  {id:'textil',name:'Textilstadt',type:'Typ 6 · Billiglohnproduktion',ex:'z. B. Gazipur bei Dhaka',start:50,events:[
+    ['down',-30,'Eine Modekette verlagert ihre Aufträge in ein Land mit noch niedrigeren Löhnen.','Fabriken schließen, Zehntausende Näherinnen verlieren ihre Arbeit. Gewinne sind ohnehin größtenteils ins Ausland geflossen, Rücklagen gibt es kaum.'],
+    ['down',-10,'Die Regierung erhöht den Mindestlohn.','Die Beschäftigten verdienen mehr. Die Auftraggeber drohen jedoch mit Abwanderung, weil der wichtigste Standortvorteil schrumpft.'],
+    ['down',-20,'Nähroboter ersetzen einen Teil der Handarbeit.','Wenn Maschinen billiger nähen als Menschen, lohnt sich die Produktion auch wieder nahe den Kunden in Europa. Der Ort verliert seinen einzigen Vorteil.'],
+    ['up',15,'Der Staat fördert Ausbildung und eigene Design- und Modemarken.','Mehr Wertschöpfung bleibt im Land (Upgrading). Der Ort bleibt aber vom Weltmarkt abhängig.']]},
+  {id:'call',name:'IT- und Callcenter-Standort',type:'Typ 4 · Hightech-Services',ex:'z. B. Manila',start:55,events:[
+    ['down',-25,'KI-Sprachassistenten übernehmen einfache Kundenanfragen.','Die Standardjobs fallen weg. Übrig bleiben komplexe Fälle, für die weniger Personal gebraucht wird.'],
+    ['down',-15,'Ein Konkurrenzstandort bietet zehn Jahre Steuerfreiheit.','Mehrere Firmen kündigen ihre Verträge. Der Standort ist austauschbar.'],
+    ['up',20,'Einheimische Firmen entwickeln eigene Software für den Weltmarkt.','Statt nur auszuführen, entsteht eigene Wertschöpfung und Entscheidungsmacht.'],
+    ['up',15,'Ein Konzern verlegt eine Forschungsabteilung hierher.','Hochqualifizierte Arbeitsplätze entstehen. Der Ort nähert sich einem globalen Ort (Typ 2).']]},
+  {id:'resort',name:'Ferienenklave',type:'Typ 9 · Tourismusenklave',ex:'z. B. Punta Cana',start:48,events:[
+    ['down',-30,'Eine Pandemie stoppt den internationalen Reiseverkehr.','Die Hotels schließen, Saisonkräfte stehen ohne Einkommen da. Die Enklave hat keine andere wirtschaftliche Grundlage.'],
+    ['down',-15,'Reiseveranstalter schließen günstigere Verträge mit einer Nachbarinsel.','Die Buchungen sinken. Die Entscheidung fiel in der Zentrale eines europäischen Konzerns.'],
+    ['down',-20,'Ein Hurrikan zerstört Strände und Anlagen.','Der Wiederaufbau hängt davon ab, ob ausländische Hotelketten neu investieren.'],
+    ['up',10,'Bäuerinnen und Handwerker aus dem Umland werden Zulieferer der Hotels.','Mehr Geld bleibt in der Region. Die Enklave öffnet sich etwas zum Umland.']]},
+  {id:'kupfer',name:'Kupferrevier',type:'Typ 7 · Rohstoffproduktion',ex:'z. B. Copperbelt in Sambia',start:52,events:[
+    ['down',-25,'Der Weltmarktpreis für Kupfer fällt stark.','Die Mine arbeitet mit Verlust, Schichten werden gestrichen. Das Revier kann den Preis nicht beeinflussen.'],
+    ['down',-35,'Die Lagerstätte ist erschöpft.','Die Bergbaufirma zieht ab. Zurück bleiben Abraumhalden und arbeitslose Bergleute.'],
+    ['up',15,'Die Elektromobilität lässt die Nachfrage nach Kupfer steigen.','Neue Investitionen fließen. Die Abhängigkeit vom Weltmarkt bleibt aber bestehen.'],
+    ['up',15,'Im Land entsteht ein Werk, das Kupfer zu Kabeln weiterverarbeitet.','Ein Teil der Wertschöpfung bleibt im Land. Das ist ein erster Schritt aus der reinen Rohstoffrolle.']]},
+  {id:'auto',name:'Autostadt',type:'Typ 3 · Fordistische Industriezone',ex:'z. B. Detroit ab den 1970er-Jahren',start:78,events:[
+    ['down',-25,'Der Konzern verlagert die Produktion nach Mexiko.','Werke schließen, Zulieferer gehen pleite. Auch ein globaler Ort kann absteigen.'],
+    ['down',-20,'Der Umstieg auf Elektroautos wird verpasst.','Konkurrenten aus anderen Ländern übernehmen den Markt.'],
+    ['down',-15,'Die Stadt verliert Steuereinnahmen und Einwohner.','Ganze Viertel verfallen. Aus Teilen der Stadt wird neue Peripherie mitten im reichen Norden.'],
+    ['up',10,'Ein Forschungszentrum für Batterietechnik siedelt sich an.','Neue, hochqualifizierte Arbeitsplätze entstehen.']]}
+];
+
+const QA=[
+  ['Das Finanzviertel der City of London mit Börse und Großbanken','gew',1],
+  ['Forschungslabore von Technologiekonzernen im Silicon Valley','gew',2],
+  ['Die Autoindustrie der Region Stuttgart mit ihren Zulieferern','gew',3],
+  ['Hafen und Bankenviertel von Singapur','gew',1],
+  ['IT-Dienstleister in Bengaluru, die Software für US-Banken warten','sch',4],
+  ['Maquiladoras in Ciudad Juárez, die Teile für US-Konzerne montieren','sch',5],
+  ['Textilfabriken bei Dhaka, die für europäische Modeketten nähen','sch',6],
+  ['Sojaplantagen in Mato Grosso (Brasilien) für den Export nach China','sch',7],
+  ['Teppichknüpfen in Heimarbeit in Nordindien für Möbelhäuser in Europa','sch',8],
+  ['All-inclusive-Resorts in Punta Cana','sch',9],
+  ['Abgelegene Dörfer im Norden Malis ohne Straßenanschluss und ohne Absatzmarkt','ver',null],
+  ['Entvölkerte Dörfer im Landesinneren Spaniens („España vaciada“)','ver',null]
+];
+const QB=[
+  ['Gated Community mit Golfplatz am Stadtrand','int','Villenviertel gehören zu den global integrierten Fragmenten: Lebensstil, Einkommen und Kontakte sind global ausgerichtet.'],
+  ['Exportproduktionszone am Hafen','int','Sie produziert direkt für den Weltmarkt und ist über den Hafen angebunden.'],
+  ['Bürotürme mit Regionalzentralen internationaler Konzerne','int','Das Wirtschaftsfragment ist direkt mit den Kommandozentren verbunden.'],
+  ['Traditioneller Basar in der Altstadt','nint','Die Altstadt versorgt die Stadtbevölkerung, das globale Geschäft läuft an ihr vorbei.'],
+  ['Hüttensiedlung am Flussufer','nint','Slums sind der Überlebensraum der „Überflüssigen“, auch wenn einzelne Bewohner in der Exportzone arbeiten.'],
+  ['Ministerien und Behörden im Regierungsviertel','nint','Im Modell ist das Verwaltungsviertel nicht global integriert. Der Staat setzt nur den Rahmen.']
+];
+
+/* ================= Tabs ================= */
+const TABS=['global','lokal','dynamik','ueben'];
+function showTab(id){
+  $$('.tab').forEach(b=>{const on=b.dataset.tab===id; b.setAttribute('aria-selected',on); b.tabIndex=on?0:-1;});
+  $$('.panel').forEach(p=>p.hidden=p.id!=='p-'+id);
+  try{localStorage.setItem('frag-tab',id)}catch(e){}
+}
+$$('.tab').forEach(b=>{
+  b.onclick=()=>showTab(b.dataset.tab);
+  b.onkeydown=e=>{const i=TABS.indexOf(b.dataset.tab); let j=null;
+    if(e.key==='ArrowRight')j=(i+1)%TABS.length; if(e.key==='ArrowLeft')j=(i+TABS.length-1)%TABS.length;
+    if(j!==null){e.preventDefault();e.stopPropagation();showTab(TABS[j]);$(`.tab[data-tab="${TABS[j]}"]`).focus();}};
+});
+
+/* ================= 1 Globale Fragmentierung ================= */
+const OY=20;
+function buildGlobal(){
+  const P=(x,y)=>[x,y+OY];
+  const borders=["M20,175 L120,165 L150,210 L110,262 L40,290","M200,20 L215,110 L182,165 L205,232 L150,302 L172,470","M300,20 L318,140 L292,202 L322,282 L300,470","M420,10 L402,108 L447,200 L422,298 L452,470","M540,20 L562,150 L532,232 L577,330 L560,470","M660,30 L652,140 L702,230 L662,330 L692,450","M205,232 L292,244","M447,200 L532,190","M577,330 L662,322","M322,282 L422,298","M702,230 L815,252","M110,390 L300,362","M452,420 L560,410","M20,220 L110,262","M662,90 L815,120"];
+  const gew=MK.filter(m=>m[2]<=3), sch=MK.filter(m=>m[2]>3);
+  let net='';
+  const curve=(a,b,cls,col,w,dash)=>{const mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2,dx=b[0]-a[0],dy=b[1]-a[1];const cx=mx-dy*.15,cy=my+dx*.15;
+    return `<path class="net ${cls}" d="M${a[0]},${a[1]+OY} Q${cx.toFixed(0)},${(cy+OY).toFixed(0)} ${b[0]},${b[1]+OY}" fill="none" style="stroke:var(${col})" stroke-width="${w}" ${dash?'stroke-dasharray="4 4"':''} opacity=".7"/>`;};
+  for(let i=0;i<gew.length;i++)for(let j=i+1;j<gew.length;j++){const d=Math.hypot(gew[i][0]-gew[j][0],gew[i][1]-gew[j][1]); if(d<300) net+=curve(gew[i],gew[j],'net-g','--gew',1.6,false);}
+  sch.forEach(s=>{let best=null,bd=1e9;gew.forEach(g=>{const d=Math.hypot(s[0]-g[0],s[1]-g[1]);if(d<bd){bd=d;best=g;}}); net+=curve(s,best,'net-s','--sch',1.4,true);});
+  const holes=MK.map(m=>`<ellipse cx="${m[0]}" cy="${m[1]+OY}" rx="34" ry="26" fill="black"/>`).join('');
+  const marker=m=>{const [x,y0,n]=m,y=y0+OY,g=TYPES[n][0];
+    const body=g==='gew'
+      ?`<path d="M${x-17},${y} v9 a17,8 0 0 0 34,0 v-9" style="fill:var(--surface);stroke:var(--gew)" stroke-width="1.5"/><ellipse cx="${x}" cy="${y}" rx="17" ry="8" style="fill:var(--gew)"/><text x="${x}" y="${y+4}" class="num" text-anchor="middle">${n}</text>`
+      :`<ellipse cx="${x}" cy="${y+3}" rx="17" ry="10" style="fill:var(--sch);stroke:var(--surface)" stroke-width="1.5"/><text x="${x}" y="${y+7}" class="num" text-anchor="middle">${n}</text>`;
+    return `<g class="el" data-from="${g==='gew'?1:2}"><g class="mk ${g}" data-term="t${n}" tabindex="0" role="button" aria-label="Typ ${n}: ${TYPES[n][1]}">${body}</g></g>`;};
+  const svg=`<svg class="dia" id="gdia" viewBox="0 0 820 490" role="img" aria-label="Modell der globalen Fragmentierung: Weltellipse mit globalen Orten, globalisierten Orten und neuer Peripherie">
+  <defs>
+    <clipPath id="gclip"><ellipse cx="410" cy="${230+OY}" rx="395" ry="205"/></clipPath>
+    <clipPath id="nclip"><path d="M0,0 H820 V${212+OY} C650,${190+OY} 560,${240+OY} 420,${212+OY} S160,${178+OY} 0,${218+OY}Z"/></clipPath>
+    <pattern id="hatch" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)"><rect width="9" height="9" style="fill:var(--peri)"/><line x1="0" y1="0" x2="0" y2="9" style="stroke:var(--hatch)" stroke-width="2.4"/></pattern>
+    <mask id="holes"><rect width="820" height="490" fill="white"/>${holes}</mask>
+  </defs>
+  <ellipse cx="410" cy="${230+OY}" rx="395" ry="205" style="fill:var(--peri);stroke:var(--hatch)" stroke-width="1.5"/>
+  <g clip-path="url(#gclip)">
+    <g class="el" data-from="0" data-to="0"><rect width="820" height="490" clip-path="url(#nclip)" style="fill:var(--ink)" opacity=".08"/></g>
+    <g class="el" data-from="3" data-term="peri" tabindex="0" role="button" aria-label="Neue Peripherie"><rect width="820" height="490" style="fill:url(#hatch)" mask="url(#holes)" opacity=".75"/></g>
+    <g data-term="grenze" tabindex="0" role="button" aria-label="Staatsgrenzen" transform="translate(0,${OY})">${borders.map(d=>`<path d="${d}" class="hit"/><path d="${d}" fill="none" style="stroke:var(--bline)" stroke-width="2.5" stroke-linejoin="round"/>`).join('')}</g>
+  </g>
+  <g class="el" data-from="0" data-to="3" data-dim="1" data-term="ns" tabindex="0" role="button" aria-label="Nord-Süd-Grenze">
+    <path d="M15,${218+OY} C160,${178+OY} 300,${240+OY} 420,${212+OY} S650,${190+OY} 805,${214+OY}" class="hit"/>
+    <path d="M15,${218+OY} C160,${178+OY} 300,${240+OY} 420,${212+OY} S650,${190+OY} 805,${214+OY}" fill="none" style="stroke:var(--ink2)" stroke-width="3" stroke-dasharray="10 6"/>
+  </g>
+  <g class="el" data-from="0" data-to="3" data-dim="1"><text x="410" y="16" class="big" text-anchor="middle">NORDEN · „ENTWICKELT“</text><text x="410" y="484" class="big" text-anchor="middle">SÜDEN · „UNTERENTWICKELT“</text></g>
+  <g class="el" data-from="4" data-term="netz" tabindex="0" role="button" aria-label="Globale Vernetzung">${net}</g>
+  ${MK.map(marker).join('')}
+  <g class="el" data-from="3"><text x="640" y="${238+OY}" class="perilab" text-anchor="middle">Neue Peripherie</text><text x="160" y="${248+OY}" class="perilab" text-anchor="middle">Neue Peripherie</text><text x="330" y="${160+OY}" class="perilab" text-anchor="middle">… auch im Norden</text></g>
+</svg>`;
+  $('#gHost').innerHTML=svg;
+}
+buildGlobal();
+let gStep=0,gAll=false,gFilter='alle';
+function gRender(){
+  const svg=$('#gdia'), s=gAll?4:gStep;
+  svg.dataset.step=gAll?'all':gStep;
+  $$('#gdia .el').forEach(e=>{const f=+e.dataset.from,t=e.dataset.to!=null?+e.dataset.to:99;
+    e.classList.toggle('on',s>=f&&s<=t); e.classList.toggle('dim',e.dataset.dim!=null&&s>=+e.dataset.dim);});
+  if(gFilter==='alle')delete svg.dataset.filter; else svg.dataset.filter=gFilter;
+  $('#gDots').innerHTML=GSTEPS.map((_,i)=>`<button class="sdot${!gAll&&i<gStep?' done':''}" ${!gAll&&i===gStep?'aria-current="step"':''} data-i="${i}" aria-label="Schritt ${i+1}">${i+1}</button>`).join('');
+  $$('#gDots .sdot').forEach(b=>b.onclick=()=>{gAll=false;gStep=+b.dataset.i;gRender();});
+  $('#gPrev').disabled=!gAll&&gStep===0; $('#gNext').disabled=!gAll&&gStep===GSTEPS.length-1;
+  $('#gAllBtn').setAttribute('aria-pressed',gAll);
+  const card=$('#gStep');
+  if(gAll){
+    card.style.setProperty('--mc','var(--ink)');
+    card.innerHTML=`<span class="stepno">Gesamtbild</span><h3>Globale Fragmentierung</h3><p class="txt">Gewinner, Scheingewinner und Verlierer liegen quer über die Welt verteilt, unabhängig von Staatsgrenzen. Hebe unten eine Gruppe hervor oder tippe einzelne Nummern an.</p>
+      <div class="example"><b>Merksatz:</b> Die Globalisierung verbindet Inseln, nicht Länder.</div>`;
+  }else{
+    const [g,t,x,ex]=GSTEPS[gStep];
+    card.style.setProperty('--mc',g?`var(--${g})`:'var(--ink)');
+    card.innerHTML=`<span class="stepno">Schritt ${gStep+1} von ${GSTEPS.length}${g?' · '+GROUPS[g].ort:''}</span><h3>${t}</h3>${g?`<p class="muted" style="font-size:.9rem;font-style:italic">${GROUPS[g].en}</p>`:''}<p class="txt">${x}</p>${ex?`<div class="example"><b>Beispiel:</b> ${ex}</div>`:''}${gStep===GSTEPS.length-1?'<button class="linkbtn" id="toLokal">Weiter zur lokalen Fragmentierung ›</button>':''}`;
+    const tl=$('#toLokal'); if(tl) tl.onclick=()=>{showTab('lokal');window.scrollTo({top:0,behavior:'smooth'});};
+  }
+}
+function gTerm(key){
+  $$('#gdia .sel').forEach(e=>e.classList.remove('sel'));
+  let g,t,x,b,extra='';
+  if(key[0]==='t'&&TYPES[key.slice(1)]){const n=key.slice(1);[g,t,x,b]=TYPES[n]; t=`${n} · ${t}`;
+    extra=`<span class="gchip ${g}">${GROUPS[g].name} · ${GROUPS[g].ort}</span>`;}
+  else {[g,t,x,b]=GTERMS[key]; if(g) extra=`<span class="gchip ${g}">${GROUPS[g].name}</span>`;}
+  $('#gTerm').innerHTML=`<span class="eyebrow">Fachbegriff</span>${extra}<h4>${t}</h4><p>${x}</p>${b?`<p class="muted"><b>Beispiele:</b> ${b}</p>`:''}`;
+}
+$('#gHost').addEventListener('click',e=>{const el=e.target.closest('[data-term]'); if(!el)return; gTerm(el.dataset.term); el.classList.add('sel');});
+$('#gHost').addEventListener('keydown',e=>{if(e.key!=='Enter'&&e.key!==' ')return;const el=e.target.closest('[data-term]'); if(!el)return;e.preventDefault(); gTerm(el.dataset.term); el.classList.add('sel');});
+$('#gPrev').onclick=()=>{if(gAll){gAll=false;gStep=GSTEPS.length-1;}else if(gStep>0)gStep--; gRender();};
+$('#gNext').onclick=()=>{if(gAll){gAll=false;gStep=0;}else if(gStep<GSTEPS.length-1)gStep++; gRender();};
+$('#gAllBtn').onclick=()=>{gAll=!gAll; gRender();};
+$$('.fchip').forEach(b=>b.onclick=()=>{gFilter=b.dataset.f; $$('.fchip').forEach(c=>c.setAttribute('aria-pressed',c===b)); if(gFilter!=='alle')gAll=true; gRender();
+  if(gFilter==='ver')gTerm('peri'); else if(gFilter!=='alle'){const g=GROUPS[gFilter];$('#gTerm').innerHTML=`<span class="eyebrow">Gruppe</span><span class="gchip ${gFilter}">${g.name}</span><h4>${g.ort}</h4><p>${gFilter==='gew'?'Typen 1 bis 3: Sie steuern die Weltwirtschaft und ziehen den größten Nutzen aus ihr.':'Typen 4 bis 9: Sie sind in den Weltmarkt eingebunden, aber abhängig und austauschbar.'}</p>`;}});
+document.addEventListener('keydown',e=>{
+  if($('#p-global').hidden)return; const tag=(e.target.tagName||'').toLowerCase(); if(e.target.closest('.tabs')||tag==='input')return;
+  if(e.key==='ArrowRight'){e.preventDefault();$('#gNext').click();} if(e.key==='ArrowLeft'){e.preventDefault();$('#gPrev').click();}
+});
+gRender();
+
+/* ================= 2 Lokale Fragmentierung ================= */
+let inside=false;
+function cTerm(key){
+  $$('#city .sel,#inner .sel').forEach(e=>e.classList.remove('sel'));
+  const [i,t,was,wer,bez]=LOC[key];
+  $('#cTerm').innerHTML=`<span class="eyebrow">${inside?'Im Wirtschaftsfragment':'Fragment'}</span><span class="ichip ${i}">${INTLAB[i]}</span><h4>${t}</h4>
+   <dl><dt>Was ist hier?</dt><dd>${was}</dd><dt>Wer lebt oder arbeitet hier?</dt><dd>${wer}</dd><dt>Verbindung zur Welt</dt><dd>${bez}</dd></dl>
+   ${key==='wirtschaft'?'<button class="linkbtn" id="zoomIn2">Hineinzoomen ›</button>':''}`;
+  const z=$('#zoomIn2'); if(z) z.onclick=()=>setInside(true);
+}
+function bindTerms(root){
+  root.addEventListener('click',e=>{const el=e.target.closest('[data-term]'); if(!el)return; cTerm(el.dataset.term); el.classList.add('sel');});
+  root.addEventListener('keydown',e=>{if(e.key!=='Enter'&&e.key!==' ')return;const el=e.target.closest('[data-term]'); if(!el)return;e.preventDefault(); cTerm(el.dataset.term); el.classList.add('sel');});
+}
+bindTerms($('#city')); bindTerms($('#inner'));
+function setInside(v){
+  inside=v; $('#cityWrap').hidden=v; $('#innerWrap').hidden=!v; $('#cityToggles').hidden=v; $('#cityLegend').hidden=v;
+  $('#cityTitle').textContent=v?'Innenansicht: Wirtschaftsfragment':'Eine globalisierte Stadt';
+  $('#zoomBtn').textContent=v?'‹ Zurück zur Stadt':'Ins Wirtschaftsfragment zoomen ›';
+  $('#cTerm').innerHTML=v?`<span class="eyebrow">Im Wirtschaftsfragment</span><h4>Auch das Fragment ist fragmentiert</h4><p>Selbst im Fragment der Gewinner gibt es Abstufungen: oben die Head-Offices, darunter Apartments der Fachkräfte, am Rand Werkhallen, Arbeiterunterkünfte und Heimarbeit. Tippe die Ebenen an.</p>`
+    :`<span class="eyebrow">Fragment</span><p class="hint">Noch nichts ausgewählt. Tippe in der Karte auf ein Viertel.</p>`;
+}
+$('#zoomBtn').onclick=()=>setInside(!inside);
+$$('#cityToggles .sbtn').forEach(b=>b.onclick=()=>{const on=b.getAttribute('aria-pressed')!=='true'; b.setAttribute('aria-pressed',on); $('#city').classList.toggle(b.dataset.t,on);
+  if(b.dataset.t==='investor'&&on){$('#cTerm').innerHTML=`<span class="eyebrow">Perspektive</span><h4>Blick der Investoren</h4><p>Für internationale Unternehmen zählen nur die global integrierten Fragmente und die Verkehrsknoten. Der Rest der Stadt ist für sie ein weißer Fleck, obwohl dort die meisten Menschen leben.</p>`;}
+  if(b.dataset.t==='show-links'&&on){$('#cTerm').innerHTML=`<span class="eyebrow">Verflechtungen</span><h4>Inseln im globalen Netz</h4><p>Die integrierten Fragmente sind mit globalen Orten auf der ganzen Welt verbunden, über Flughafen, Hafen und Datenleitungen. Mit dem Slum nebenan haben sie wenig zu tun.</p>`;}
+  if(b.dataset.t==='show-walls'&&on){$('#cTerm').innerHTML=`<span class="eyebrow">Abgrenzung</span><h4>Mauern und Zäune</h4><p>Gated Community und Exportzone sind abgeriegelt. Wer hinein darf, wird kontrolliert. Die Fragmentierung wird so auch baulich sichtbar.</p>`;}
+});
+
+/* ================= 3 Dynamik ================= */
+let cur=PLACES[0], val=cur.start, used=new Set(), log=[];
+const bandOf=v=>v<34?'ver':v<67?'sch':'gew';
+const BANDNAME={ver:'Neue Peripherie',sch:'Globalisierter Ort',gew:'Globaler Ort'};
+function dRender(){
+  $('#places').innerHTML=PLACES.map(p=>`<button class="pbtn" data-p="${p.id}" aria-pressed="${p===cur}"><b>${p.name}</b><span>${p.type}</span></button>`).join('');
+  $$('#places .pbtn').forEach(b=>b.onclick=()=>{cur=PLACES.find(p=>p.id===b.dataset.p); val=cur.start; used=new Set(); log=[]; dRender();});
+  const band=bandOf(val);
+  $('#dPlaceType').textContent=cur.type;
+  $('#dNow').textContent=BANDNAME[band]; $('#dNow').style.color=`var(--${band})`;
+  $('#dPlaceEx').textContent=cur.ex;
+  $('#pin').style.left=val+'%'; $('#pinLab').textContent=cur.name;
+  $('#events').innerHTML=cur.events.map((e,i)=>`<button class="evbtn" data-i="${i}" ${used.has(i)?'disabled':''}><span class="tag ${e[0]}">${e[0]==='up'?'Chance':'Risiko'}</span><span>${e[2]}</span></button>`).join('');
+  $$('#events .evbtn').forEach(b=>b.onclick=()=>{const i=+b.dataset.i,e=cur.events[i]; const before=bandOf(val); val=Math.max(4,Math.min(96,val+e[1])); used.add(i); const after=bandOf(val);
+    log.unshift({t:e[2],x:e[3],jump:before!==after?`Der Ort rutscht von „${BANDNAME[before]}“ zu „${BANDNAME[after]}“.`:null}); dRender();});
+  $('#log').innerHTML=log.length?log.map(l=>`<li class="${l.jump?'jump':''}"><b>${l.t}</b><span>${l.x}</span>${l.jump?`<span class="muted"><b>${l.jump}</b></span>`:''}</li>`).join('')
+    :`<li class="empty">Noch kein Ereignis. Wähle links ein Risiko oder eine Chance.</li>`;
+}
+$('#dReset').onclick=()=>{val=cur.start;used=new Set();log=[];dRender();};
+dRender();
+
+/* ================= 4 Üben ================= */
+const OPTS_A=[['gew','Gewinner'],['sch','Scheingewinner'],['ver','Verlierer']];
+const OPTS_B=[['int','global integriert'],['nint','nicht integriert']];
+let ans={};
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function feedbackA(item){const [,g,n]=item; return n?`${GROUPS[g].name}, Typ ${n}: ${TYPES[n][1]}.`:`${GROUPS[g].name}: neue Peripherie. ${g==='ver'&&item[0].includes('Spanien')?'Auch im reichen Norden gibt es Räume, die für die Weltwirtschaft uninteressant sind.':'Für den Weltmarkt ist dieser Raum uninteressant.'}`;}
+function renderQuiz(){
+  const mk=(list,opts,sec)=>list.map(it=>{const id=sec+QA.concat(QB).indexOf(it);
+    return `<div class="card q" data-id="${id}"><p class="stmt">${it[0]}</p><div class="btns">${opts.map(o=>`<button class="qb" data-a="${o[0]}">${sec==='A'?`<span class="dot" style="background:var(--${o[0]})"></span>`:''}${o[1]}</button>`).join('')}</div><p class="fb" hidden></p></div>`;}).join('');
+  $('#qA').innerHTML=mk(shuffle(QA),OPTS_A,'A'); $('#qB').innerHTML=mk(shuffle(QB),OPTS_B,'B');
+  $$('.q').forEach(q=>{const id=q.dataset.id, sec=id[0], idx=+id.slice(1), item=QA.concat(QB)[idx];
+    q.querySelectorAll('.qb').forEach(b=>b.onclick=()=>{
+      const ok=b.dataset.a===item[1]; ans[id]=ok; q.classList.add(ok?'right':'wrong');
+      q.querySelectorAll('.qb').forEach(x=>{x.disabled=true; if(x===b)x.classList.add('picked');});
+      const fb=q.querySelector('.fb'); fb.hidden=false;
+      const right=(sec==='A'?OPTS_A:OPTS_B).find(o=>o[0]===item[1])[1];
+      fb.innerHTML=`<strong>${ok?'Richtig.':'Nicht ganz.'}</strong>${ok?'':`Passend ist „${right}“. `}${sec==='A'?feedbackA(item):item[2]}`;
+      score();});});
+  score();
+}
+function score(){const n=QA.length+QB.length, r=Object.values(ans).filter(Boolean).length, w=Object.values(ans).filter(v=>!v).length;
+  $('#score').textContent=`${r} von ${n} richtig`;
+  $('#bar').innerHTML=`<i style="width:${r/n*100}%;background:var(--good)"></i><i style="width:${w/n*100}%;background:var(--bad)"></i>`;}
+$('#qReset').onclick=()=>{ans={};renderQuiz();};
+renderQuiz();
+
+try{const t=localStorage.getItem('frag-tab'); if(t&&TABS.includes(t)) showTab(t);}catch(e){}
+if(location.hash&&TABS.includes(location.hash.slice(1))) showTab(location.hash.slice(1));
+</script>
+
+</body></html>
